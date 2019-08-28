@@ -75,6 +75,9 @@ export class OperadorComponent implements OnInit {
       Persona_Destacada: this.fb.array([])
     });
 
+    /*devolvera un array con los cod compañia de usuario*/
+    console.log(this.loginService.currentUserValue.cod_compania)
+
     this.setProyects();
 
   }
