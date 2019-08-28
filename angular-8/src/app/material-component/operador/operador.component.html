@@ -1,0 +1,399 @@
+<!-- ============================================================== -->
+<!-- row -->
+<!-- ============================================================== -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <!-- Card column -->
+  <div fxFlex.gt-sm="100%" fxFlex="100">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Servicio </mat-card-title>
+        <!--<mat-card-subtitle>Check the <code class=""><a href="https://material.angular.io/components/tabs/overview">Official Component</a></code></mat-card-subtitle>-->
+        <mat-card-subtitle>Formulario de servicio</mat-card-subtitle>
+
+        <form [formGroup]="Servicio" class="matero-form-horizontal">
+          <div fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Cia.</mat-label>
+                <mat-select required formControlName="Cod_Compania">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="44">44</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Cod_Compania').invalid">Seleccione la compañía</mat-error>
+              </mat-form-field>
+            </div>
+
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>No. Control</mat-label>
+                <input matInput placeholder="Ingrese el No. Control" type="number" autocomplete="off" formControlName="NoControl" required>
+                <mat-error *ngIf="Servicio.get('NoControl').invalid">Ingrese el número de control </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="40" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Tipo de Servicio.</mat-label>
+                <mat-select required formControlName="Cod_Servicio">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="1">Busqueda y Rescate</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Cod_Servicio').invalid">Por favor seleccione el tipo de servicio
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker2" autocomplete="off" placeholder="Fecha de servicio" formControlName="Fecha_Servicio" required>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="Servicio.get('Fecha_Servicio').invalid">Please ingrese la fecha</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Min. Trab.</mat-label>
+                <input matInput placeholder="Minutos trabajados" type="number" autocomplete="off" formControlName="Min_Trabajados" required>
+                <mat-error *ngIf="Servicio.get('Min_Trabajados').invalid">Ingrese los Min. Trabajados</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="80" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Ingrese la dirección" autocomplete="off" formControlName="Direccion" required>
+                <mat-error *ngIf="Servicio.get('Direccion').invalid">Ingrese la dirección del servicio</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="60" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Nombre solicitante</mat-label>
+                <input matInput placeholder="Ingrese el nombre del solicitante" autocomplete="off" formControlName="Nombre_Solicitante" required>
+                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese el nombre del solicitante
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Forma de aviso</mat-label>
+                <mat-select required formControlName="Cod_TipoAviso">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="1">Telefono</mat-option>
+                  <mat-option value="1">Personal</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Cod_TipoAviso').invalid">Seleccione el tipo de aviso</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Radio/Telefonista</mat-label>
+                <mat-select required formControlName="Carnet_RadioTelefonista">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="PAS-044-0548">Manuel de Jesús</mat-option>
+                  <mat-option value="PAS-044-0554">Oscar David</mat-option>
+                  <mat-option value="PAS-044-4653">Eduardo Antonio</mat-option>
+                  <mat-option value="PAS-044-1768">Esvin Román</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Carnet_RadioTelefonista').invalid">Seleccione el tipo de aviso
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Cia. Salida</mat-label>
+                <mat-select required formControlName="Cod_Compania_Salida">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="44">44</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Cod_Compania_Salida').invalid">Seleccione la compañía</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker3" autocomplete="off" placeholder="Fecha de salida" formControlName="Fecha_Salida" required>
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+                <mat-error *ngIf="Servicio.get('Fecha_Salida').invalid">Please ingrese la fecha</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="10" fxFlex.lt-sm="100">
+              <mat-label>Hora Salida</mat-label>
+              <ngb-timepicker formControlName="Hora_Salida" [seconds]="seconds" required></ngb-timepicker>
+              <mat-error *ngIf="Servicio.get('Hora_Salida').invalid">Ingrese hora salida</mat-error>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Cia. Entrada</mat-label>
+                <mat-select required formControlName="Cod_Compania_Entrada">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="44">44</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Cod_Compania_Entrada').invalid">Seleccione la compañía</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker4" autocomplete="off" placeholder="Fecha de entrada" formControlName="Fecha_Entrada" required>
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+                <mat-error *ngIf="Servicio.get('Fecha_Entrada').invalid">Please ingrese la fecha</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="10" fxFlex.lt-sm="100">
+              <mat-label>Hora entrada</mat-label>
+              <ngb-timepicker formControlName="Hora_Entrada" [seconds]="seconds" required></ngb-timepicker>
+              <mat-error *ngIf="Servicio.get('Hora_Entrada').invalid">Ingrese hora entrada</mat-error>
+            </div>
+
+            <div fxFlex.gt-sm="100%" fxFlex="100">
+              <div formArrayName="Persona_Atendida">
+                <mat-card-title>Personas atendidas</mat-card-title>
+                <div *ngFor="let project of Servicio.get('Persona_Atendida').controls; let j=index">
+                  <fieldset>
+                    <legend>
+                      <h4>Persona No. {{j+1}}</h4>
+                    </legend>
+                    <div [formGroupName]="j">
+                      <div fxFlex="30" fxFlex.lt-sm="100">
+                        <mat-form-field>
+                          <mat-label>Nombre</mat-label>
+                          <input matInput autocomplete="off" placeholder="Ingrese el nombre del atendido" formControlName="Nombre" required>
+                          <mat-error *ngIf="project.get('Nombre').invalid">Ingrese el nombre del atendido</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="10" fxFlex.lt-sm="100">
+                        <mat-form-field>
+                          <mat-label>Edad</mat-label>
+                          <input matInput placeholder="Ingrese la edad" autocomplete="off" type="number" formControlName="Edad" required>
+                          <mat-error *ngIf="project.get('Edad').invalid">Ingrese la edad</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <br>
+                      <br>
+                      <div fxFlex="30" fxFlex.lt-sm="100">
+                        <mat-form-field>
+                          <mat-label>Domicilio.</mat-label>
+                          <input matInput placeholder="Ingrese el domicilio" autocomplete="off" formControlName="Domicilio" required>
+                          <mat-error *ngIf="project.get('Domicilio').invalid">Ingrese el domicilio</mat-error>
+                        </mat-form-field>
+                      </div>
+
+                      <div fxFlex="20" fxFlex.lt-sm="100">
+                        <mat-form-field>
+                          <mat-label>Traslado</mat-label>
+                          <mat-select required formControlName="Cod_Ubi_Traslado">
+                            <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                            <mat-option value="1">Hospital de Chimaltenango</mat-option>
+                            <mat-option value="2">Hospital de Melchor de Mencos</mat-option>
+                            <mat-option value="41">Hospital Roosevelt</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="project.get('Cod_Ubi_Traslado').invalid">Seleccione la compañía</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="5%" fxFlex.lt-sm="100">
+                        <button mat-raised-button color="warn" (click)="deletePerAte(Servicio.controls.Persona_Atendida, j)">Eliminar</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <br>
+                </div>
+              </div>
+            </div>
+
+            <div fxFlex.gt-sm="100%" fxFlex="100">
+              <button mat-raised-button color="primary" (click)="addNewPerAte(Servicio.controls.Persona_Atendida)">Agregar
+                Persona</button>
+            </div>
+
+          </div>
+          <br>
+
+          <mat-card-title>Recursos Cia.</mat-card-title>
+          <mat-card-subtitle> Listado de unidades y personal destacado que atendieron la emergencia.</mat-card-subtitle>
+          <table style="width: 100%">
+            <tr>
+              <td>
+                <div formArrayName="Unidad_Asiste">
+                  <mat-card-title>Unidades que asistieron</mat-card-title>
+                  <div *ngFor="let project of Servicio.get('Unidad_Asiste').controls; let j=index">
+                    <fieldset>
+                      <legend>
+                        <h4>Unidad No. {{j+1}}</h4>
+                      </legend>
+                      <div [formGroupName]="j">
+                        <div fxFlex="40" fxFlex.lt-sm="100">
+                          <mat-form-field>
+                            <mat-label>Unidad</mat-label>
+                            <mat-select required formControlName="Cod_Unidad">
+                              <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                              <mat-option value="144">144</mat-option>
+                              <mat-option value="299">299</mat-option>
+                              <mat-option value="439">439</mat-option>
+                              <mat-option value="512">512</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="project.get('Cod_Unidad').invalid">Seleccione unidad
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div fxFlex="40" fxFlex.lt-sm="100">
+                          <mat-form-field>
+                            <mat-label>Piloto</mat-label>
+                            <mat-select required formControlName="Carnet_Piloto">
+                              <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                              <mat-option value="PAS-044-0548">Manuel de Jesús</mat-option>
+                              <mat-option value="PAS-044-0554">Oscar David</mat-option>
+                              <mat-option value="PAS-044-4653">Eduardo Antonio</mat-option>
+                              <mat-option value="PAS-044-1768">Esvin Román</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="project.get('Carnet_Piloto').invalid">Seleccione el piloto
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div fxFlex="20" fxFlex.lt-sm="100">
+                          <button mat-raised-button color="warn" (click)="deleteUniAsi(Servicio.controls.Unidad_Asiste, j)">Eliminar</button>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <br>
+                  </div>
+                  <br>
+                  <button mat-raised-button color="primary" (click)="addNewUniAsi(Servicio.controls.Unidad_Asiste)">Agregar
+                    Unidad</button>
+                </div>
+              </td>
+              <td>
+                <div formArrayName="Persona_Destacada">
+                  <mat-card-title>Personal destacado</mat-card-title>
+                  <div *ngFor="let project of Servicio.get('Persona_Destacada').controls; let j=index">
+                    <fieldset>
+                      <legend>
+                        <h4>Personal No. {{j+1}}</h4>
+                      </legend>
+                      <div [formGroupName]="j">
+                        <div fxFlex="80" fxFlex.lt-sm="100">
+                          <mat-form-field>
+                            <mat-label>Bombero</mat-label>
+                            <mat-select required formControlName="Carnet">
+                              <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                              <mat-option value="PAS-044-0548">Manuel de Jesús</mat-option>
+                              <mat-option value="PAS-044-0554">Oscar David</mat-option>
+                              <mat-option value="PAS-044-4653">Eduardo Antonio</mat-option>
+                              <mat-option value="PAS-044-1768">Esvin Román</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="project.get('Carnet').invalid">Seleccione el personal destacado
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div fxFlex="20" fxFlex.lt-sm="100">
+                          <button mat-raised-button color="warn" (click)="deletePerDes(Servicio.controls.Persona_Destacada, j)">Eliminar</button>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <br>
+                  </div>
+                </div>
+                <br>
+                <button mat-raised-button color="primary" (click)="addNewPerDes(Servicio.controls.Persona_Destacada)">Agregar
+                  Personal</button>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <div fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex="100%" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Observaciones</mat-label>
+                <textarea matInput style="height: 100px" placeholder="Ingrese las observaciones" autocomplete="off" formControlName="Observaciones"
+                  required></textarea>
+                <mat-error *ngIf="Servicio.get('Observaciones').invalid">Ingrese las obsercaciones
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Formulado Por</mat-label>
+                <mat-select required formControlName="Carnet_FormuladoPor">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="PAS-044-0548">Manuel de Jesús</mat-option>
+                  <mat-option value="PAS-044-0554">Oscar David</mat-option>
+                  <mat-option value="PAS-044-4653">Eduardo Antonio</mat-option>
+                  <mat-option value="PAS-044-1768">Esvin Román</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Carnet_FormuladoPor').invalid">Seleccione el personal</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Conforme Piloto</mat-label>
+                <mat-select required formControlName="Carnet_ConformePiloto">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="PAS-044-0548">Manuel de Jesús</mat-option>
+                  <mat-option value="PAS-044-0554">Oscar David</mat-option>
+                  <mat-option value="PAS-044-4653">Eduardo Antonio</mat-option>
+                  <mat-option value="PAS-044-1768">Esvin Román</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Carnet_ConformePiloto').invalid">Seleccione el piloto</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Vo. Bo.</mat-label>
+                <mat-select required formControlName="Carnet_VoBo">
+                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                  <mat-option value="PAS-044-0548">Manuel de Jesús</mat-option>
+                  <mat-option value="PAS-044-0554">Oscar David</mat-option>
+                  <mat-option value="PAS-044-4653">Eduardo Antonio</mat-option>
+                  <mat-option value="PAS-044-1768">Esvin Román</mat-option>
+                </mat-select>
+                <mat-error *ngIf="Servicio.get('Carnet_VoBo').invalid">Seleccione el piloto</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker5" placeholder="Fecha para firma" formControlName="Fecha_Firma" required>
+                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+                <mat-error *ngIf="Servicio.get('Fecha_Firma').invalid">Please ingrese la fecha</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <br>
+          <br>
+          <button id="SaveServicio" mat-raised-button color="accent" (click)="submit()">Guardar Servicio</button>
+          <br>
+          <br>
+          <p *ngIf="viewMsg == true">
+            <ngb-alert [type]="alertType" [dismissible]="false">
+              <strong>Notificación!</strong>  {{msgRes}}.
+            </ngb-alert>
+          </p>
+        
+        </form>
+        <br>
+        <!--<pre>{{Servicio.value | json}}</pre>-->
+       </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- row -->
+<!-- ============================================================== -->
