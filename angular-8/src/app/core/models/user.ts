@@ -4,4 +4,5 @@ export class User {
     token: string;
     url_imagen: string;
     roles: string[];
+    cod_compania: string[];
 }

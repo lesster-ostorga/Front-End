@@ -6,7 +6,7 @@ import { RescateService } from '../../core/services/rescate.service.';
 import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 import { LoginService } from '../../core/services/login.service';
-
+import {Serviciotraslado} from '../operador/services/traslado.service';
 @Component({
   selector: 'app-operador',
   templateUrl: './operador.component.html',
@@ -44,7 +44,7 @@ export class OperadorComponent implements OnInit {
     ]
   };
 
-  constructor(private fb: FormBuilder, private calendar: NgbCalendar, private rescateService: RescateService, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private calendar: NgbCalendar, private rescateService: RescateService, private loginService: LoginService,private service: Serviciotraslado) {
 
     this.Servicio = this.fb.group({
       NoControl: ['', [Validators.required]],
@@ -74,7 +74,8 @@ export class OperadorComponent implements OnInit {
       Unidad_Asiste: this.fb.array([]),
       Persona_Destacada: this.fb.array([])
     });
-
+    /*devolvemr un array con los cod_compania de usuario */
+    console.log(this.loginService.currentUserValue.cod_compania)
     this.setProyects();
 
   }
@@ -154,6 +155,7 @@ export class OperadorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.service.TrasladoList();
   }
 
 
