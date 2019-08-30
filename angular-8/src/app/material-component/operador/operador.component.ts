@@ -22,6 +22,8 @@ export class OperadorComponent implements OnInit {
   msgRes: string;
   alertType: string = "success";
   Servicio: FormGroup;
+  msgLoading = "Guardar Servicio";
+  viewSpinner = false;
   data = {
     Per_Aten: [
       {
@@ -171,7 +173,8 @@ export class OperadorComponent implements OnInit {
       return;
     }
 
-    
+    this.viewSpinner = true;
+    this.msgLoading = "Procesando...";
     this.rescateService.RescateSave(this.Servicio.value)
       .pipe(first())
       .subscribe(
@@ -179,6 +182,8 @@ export class OperadorComponent implements OnInit {
           //this.router.navigate(['/starter']);
           this.viewMsg = true;
           this.alertType = "success";
+          this.viewSpinner = false;
+          this.msgLoading = "Guardar Servicio";
           this.msgRes = data.msgRespuesta;
           this.Servicio.reset();
           //console.log(data);
@@ -187,6 +192,8 @@ export class OperadorComponent implements OnInit {
           //console.log(error);
           this.viewMsg = true;
           this.alertType = "danger";
+          this.viewSpinner = false;
+          this.msgLoading = "Guardar Servicio";
           this.msgRes = error.error.codError + ": " + error.error.msgRespuesta;
         });
     // Do useful stuff with the gathered data

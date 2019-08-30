@@ -16,8 +16,10 @@
                             <mat-form-field>
                                 <mat-label>Cia.</mat-label>
                                 <mat-select required formControlName="Cod_Compania">
-                                    <mat-option></mat-option>
-                                    <mat-option [value]="44">{{loginService.currentUserValue.cod_compania}}</mat-option>
+                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
+                                        {{item}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Compania').invalid">Seleccione la compañía</mat-error>
                             </mat-form-field>
@@ -84,7 +86,7 @@
                                 <mat-select required formControlName="Cod_TipoAviso">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                     <mat-option value="1">Telefono</mat-option>
-                                    <mat-option value="1">Personal</mat-option>
+                                    <mat-option value="2">Personal</mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_TipoAviso').invalid">Seleccione el tipo de aviso</mat-error>
                             </mat-form-field>
@@ -95,7 +97,6 @@
                                 <mat-label>Radio/Telefonista</mat-label>
                                 <mat-select required formControlName="Carnet_RadioTelefonista">
                                     <mat-option *ngFor="let item of service.listCatalogoRescate.Personal" [value]="item.Carnet">
-
                                         {{item.Nombre}}
                                     </mat-option>
                                 </mat-select>
@@ -109,7 +110,9 @@
                                 <mat-label>Cia. Salida</mat-label>
                                 <mat-select required formControlName="Cod_Compania_Salida">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="44">{{loginService.currentUserValue.cod_compania}}</mat-option>
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
+                                        {{item}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Compania_Salida').invalid">Seleccione la compañía</mat-error>
                             </mat-form-field>
@@ -135,7 +138,9 @@
                                 <mat-label>Cia. Entrada</mat-label>
                                 <mat-select required formControlName="Cod_Compania_Entrada">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="44">{{loginService.currentUserValue.cod_compania}}</mat-option>
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
+                                        {{item}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Compania_Entrada').invalid">Seleccione la compañía</mat-error>
                             </mat-form-field>
@@ -195,9 +200,7 @@
                                                     <mat-select required formControlName="Cod_Ubi_Traslado" (change)="Cod_Compania($event.target.value)" required>
                                                         <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                                         <mat-option *ngFor="let item of service.listCatalogoRescate.CatTraslado" [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
-
                                                             {{item.Descripcion}}
-
                                                         </mat-option>
                                                     </mat-select>
                                                     <mat-error *ngIf="project.get('Cod_Ubi_Traslado').invalid">Seleccione la compañía</mat-error>
@@ -214,8 +217,7 @@
                         </div>
 
                         <div fxFlex.gt-sm="100%" fxFlex="100">
-                            <button mat-raised-button color="primary" (click)="addNewPerAte(Servicio.controls.Persona_Atendida)">Agregar
-                Persona</button>
+                            <button mat-raised-button color="primary" (click)="addNewPerAte(Servicio.controls.Persona_Atendida)">Agregar Persona</button>
                         </div>
 
                     </div>
@@ -240,10 +242,7 @@
                                                         <mat-select required formControlName="Cod_Unidad">
                                                             <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                                             <mat-option *ngFor="let item of service.listCatalogoRescate.CatUnidad" [value]="item.Cod_Unidad">
-
-                                                                {{item.Descripcion_TipoUnidad}} {{item.Cod_Unidad}} - {{item.Cod_Compania}}
-
-
+                                                                {{item.Descripcion_TipoUnidad}} - {{item.Cod_Unidad}} <!-- - {{item.Cod_Compania}}-->
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="project.get('Cod_Unidad').invalid">Seleccione unidad
@@ -256,10 +255,7 @@
                                                         <mat-select required formControlName="Carnet_Piloto">
                                                             <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                                             <mat-option *ngFor="let item of service.listCatalogoRescate.Piloto" [value]="item.Carnet">
-
                                                                 {{item.Nombre}}
-
-
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="project.get('Carnet_Piloto').invalid">Seleccione el piloto
@@ -274,8 +270,7 @@
                                         <br>
                                     </div>
                                     <br>
-                                    <button mat-raised-button color="primary" (click)="addNewUniAsi(Servicio.controls.Unidad_Asiste)">Agregar
-                    Unidad</button>
+                                    <button mat-raised-button color="primary" (click)="addNewUniAsi(Servicio.controls.Unidad_Asiste)">Agregar Unidad</button>
                                 </div>
                             </td>
                             <td>
@@ -292,10 +287,7 @@
                                                         <mat-label>Bombero</mat-label>
                                                         <mat-select required formControlName="Carnet">
                                                             <mat-option *ngFor="let item of service.listCatalogoRescate.Personal" [value]="item.Carnet">
-
                                                                 {{item.Nombre}}
-
-
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="project.get('Carnet').invalid">Seleccione el personal destacado
@@ -311,8 +303,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <button mat-raised-button color="primary" (click)="addNewPerDes(Servicio.controls.Persona_Destacada)">Agregar
-                  Personal</button>
+                                <button mat-raised-button color="primary" (click)="addNewPerDes(Servicio.controls.Persona_Destacada)">Agregar Personal</button>
                             </td>
                         </tr>
                     </table>
@@ -333,10 +324,7 @@
                                 <mat-label>Formulado Por</mat-label>
                                 <mat-select required formControlName="Carnet_FormuladoPor">
                                     <mat-option *ngFor="let item of service.listCatalogoRescate.Personal" [value]="item.Carnet">
-
                                         {{item.Nombre}}
-
-
                                     </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Carnet_FormuladoPor').invalid">Seleccione el personal</mat-error>
@@ -349,10 +337,7 @@
                                 <mat-select required formControlName="Carnet_ConformePiloto">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                     <mat-option *ngFor="let item of service.listCatalogoRescate.Piloto" [value]="item.Carnet">
-
                                         {{item.Nombre}}
-
-
                                     </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Carnet_ConformePiloto').invalid">Seleccione el piloto</mat-error>
@@ -364,10 +349,7 @@
                                 <mat-label>Vo. Bo.</mat-label>
                                 <mat-select required formControlName="Carnet_VoBo">
                                     <mat-option *ngFor="let item of service.listCatalogoRescate.vobo" [value]="item.Carnet">
-
                                         {{item.Nombre}}
-
-
                                     </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Carnet_VoBo').invalid">Seleccione el piloto</mat-error>
@@ -376,7 +358,7 @@
 
                         <div fxFlex="25" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <input matInput [matDatepicker]="picker5" placeholder="Fecha para firma" formControlName="Fecha_Firma" required>
+                                <input matInput [matDatepicker]="picker5" autocomplete="off" placeholder="Fecha para firma" formControlName="Fecha_Firma" required>
                                 <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                                 <mat-datepicker #picker5></mat-datepicker>
                                 <mat-error *ngIf="Servicio.get('Fecha_Firma').invalid">Please ingrese la fecha</mat-error>
@@ -386,7 +368,12 @@
 
                     <br>
                     <br>
-                    <button id="SaveServicio" mat-raised-button color="accent" (click)="submit()">Guardar Servicio</button>
+                    <!--<button id="SaveServicio" mat-raised-button color="accent" (click)="submit()">Guardar Servicio</button>-->
+
+                    <button id="SaveServicio" mat-raised-button color="accent" (click)="submit()">
+                            <span *ngIf="viewSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            {{msgLoading}}
+                    </button>
                     <br>
                     <br>
                     <p *ngIf="viewMsg == true">
@@ -397,7 +384,7 @@
 
                 </form>
                 <br>
-                <pre>{{Servicio.value | json}}</pre>-->
+                <!--<pre>{{Servicio.value | json}}</pre>-->
             </mat-card-content>
         </mat-card>
     </div>

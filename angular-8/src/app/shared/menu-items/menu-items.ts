@@ -10,18 +10,18 @@ export interface Menu {
 }
 
 const MENUITEMSOper = [
-  { state: 'starter', name: 'Starter Page', type: 'link', icon: 'av_timer' },
+  { state: 'starter', name: 'Inicio', type: 'link', icon: 'av_timer' },
   { state: 'operador', type: 'link', name: 'Operador', icon: 'local_taxi' }
 ];
 
 const MENUITEMSServicios = [
-  { state: 'starter', name: 'Starter Page', type: 'link', icon: 'av_timer' },
+  { state: 'starter', name: 'Inicio', type: 'link', icon: 'av_timer' },
   { state: 'operador', type: 'link', name: 'Operador', icon: 'local_taxi' },
   { state: 'reportes', type: 'link', name: 'Reportes', icon: 'view_list' }
 ];
 
 const MENUITEMSAdmin = [
-  { state: 'starter', name: 'Starter Page', type: 'link', icon: 'av_timer' },
+  { state: 'starter', name: 'Inicio', type: 'link', icon: 'av_timer' },
   { state: 'operador', type: 'link', name: 'Operador', icon: 'local_taxi' },
   { state: 'reportes', type: 'link', name: 'Reportes', icon: 'view_list' },
   { state: 'snackbar', type: 'link', name: 'Administración', icon: 'adb' }
