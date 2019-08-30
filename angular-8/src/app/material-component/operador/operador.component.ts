@@ -79,6 +79,7 @@ export class OperadorComponent implements OnInit {
     this.setProyects();
 
   }
+//es solo prueba de versionamiento 
 
   //Angular Reactive Forms with nested Form Arrays
   //https://stackblitz.com/edit/angular-dffny7?file=app/app.component.html
