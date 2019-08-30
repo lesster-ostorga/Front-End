@@ -34,6 +34,7 @@ import { Error404Component } from './sessions/error404/error404.component';
 import { OperadorComponent } from './operador/operador.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -70,7 +71,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SliderComponent,
     SlideToggleComponent,
     LoginComponent,
-    Error404Component
+    Error404Component,
+    ProfileComponent
   ]
 })
 export class MaterialComponentsModule {}
