@@ -1,3 +1,4 @@
+import { ProfileService } from './../../core/services/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
@@ -8,9 +9,13 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private profile: ProfileService) { }
 
   ngOnInit() {
+    this.getDataUser();
+  }
+  getDataUser(){
+    this.profile.getInfoUser().subscribe((respuesta)=>console.log(respuesta));
   }
 
 }
