@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   msgRes: string = "";
   checked = false;
   logout: string;
+  msgLoading = "Log In";
+  viewSpinner = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private loginService: LoginService) {
     this.reactiveForm = this.fb.group({
@@ -54,16 +56,22 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.msgRes = "";
+    this.viewSpinner = true;
+    this.msgLoading = "Loading...";
     this.loginService.loginUser(this.reactiveForm.value.username, this.reactiveForm.value.password, this.reactiveForm.value.remember)
       .pipe(first())
       .subscribe(
         data => {
+          this.viewSpinner = false;
+          this.msgLoading = "Log In";
           this.router.navigate(['/starter']);
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
+          this.viewSpinner = false;
+          this.msgLoading = "Log In";
+          //console.log(error);
           this.msgRes = "Usuario y contraseña incorrectos";
         });
-
+    
   }
 }
