@@ -19,6 +19,7 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { Role } from '../core/models/role';
 import { OperadorComponent } from './operador/operador.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -44,6 +45,11 @@ export const MaterialRoutes: Routes = [
     component: OperadorComponent,
     canActivate: [AuthGuard],
     data: { title: 'Button', titleI18n: 'button', data: { roles: [Role.Operador] } }
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  
   },
   {
     path: 'stepper',

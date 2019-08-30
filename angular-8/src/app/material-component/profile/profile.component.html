@@ -1,0 +1,94 @@
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+            <mat-card>
+                <mat-card-content>
+                        <mat-card-title>Perfil de Usuario</mat-card-title>
+                        <form class="matero-form-horizontal">
+                        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                          <mat-label>Nombre</mat-label>
+                                          <input matInput placeholder="Ingrese su nombre" required>
+                                        </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                          <mat-label>Apellidos</mat-label>
+                                          <input matInput placeholder="Ingrese su apellido" required>
+                                        </mat-form-field>
+                                </div>
+                        </div>
+                        <br>
+                        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                                <div fxFlex="30" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                                <input matInput [matDatepicker]="picker4" autocomplete="off" placeholder="Fecha de nacimiento"  required>
+                                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker4></mat-datepicker>
+                                        </mat-form-field>
+                                </div>
+                                <div fxFlex="70" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                          <mat-label>Dirección</mat-label>
+                                          <input matInput placeholder="Ingrese su dirección" required>
+                                        </mat-form-field>
+                                </div>
+                                
+                        </div>
+                        <br>  
+                        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                                <div fxFlex="30" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                                <mat-label>Correo</mat-label>
+                                                <input matInput placeholder="Ingrese su Correo electrónico" required>
+                                        </mat-form-field>
+                                </div>
+                                <div fxFlex="24" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                                <mat-label>Género</mat-label>
+                                                <mat-select required >
+                                                  <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                                                  <mat-option value="M">Masculino</mat-option>
+                                                  <mat-option value="F">Femenino</mat-option>
+                                                 
+                                                </mat-select>
+                                                
+                                        </mat-form-field>
+                                </div>
+                                <div fxFlex="23" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                          <mat-label>Teléfono</mat-label>
+                                          <input matInput placeholder="Ingrese su número de teléfono" required>
+                                        </mat-form-field>
+                                </div>
+                                <div fxFlex="23" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                          <mat-label>Celular</mat-label>
+                                          <input matInput placeholder="Ingrese su número de celular" required>
+                                        </mat-form-field>
+                                </div>
+                        </div>
+                        <br>     
+                        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                        <mat-form-field class="angularformcss no-line" floatLabel="never">
+                                                <img matPrefix class="input-icon" src="https://image.flaticon.com/icons/svg/60/60778.svg" width="24px" height="24px">
+                                                <input type="text" matInput placeholder="Text">
+                                              </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                        <mat-form-field>
+                                          <mat-label>Compañia</mat-label>
+                                          <input matInput placeholder="Ingrese su compañia" required>
+                                        </mat-form-field>
+                                </div>
+                                
+                        </div>
+                        <br>   
+                        </form>
+                </mat-card-content>
+                
+            </mat-card>
+        </div> 
+</div>

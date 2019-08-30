@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../../core/services/login.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,8 +8,12 @@ import { LoginService } from '../../../core/services/login.service';
 })
 export class AppHeaderComponent {
 
-  constructor(public loginService: LoginService) {
+  constructor(public loginService: LoginService,private router: Router) {
     
    
+  }
+
+  viewProfile(){
+    this.router.navigate(['/profile']);
   }
 }
