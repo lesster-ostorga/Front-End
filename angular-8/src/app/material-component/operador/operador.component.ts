@@ -49,6 +49,8 @@ export class OperadorComponent implements OnInit {
   constructor(private fb: FormBuilder, private calendar: NgbCalendar, private rescateService: RescateService, private loginService: LoginService,private service: Serviciotraslado) {
 
     this.Servicio = this.fb.group({
+
+      Cod_Municipop :['', [Validators.required]],
       NoControl: ['', [Validators.required]],
       Cod_Compania: ['', [Validators.required]],
       Cod_Servicio: ['', [Validators.required]],

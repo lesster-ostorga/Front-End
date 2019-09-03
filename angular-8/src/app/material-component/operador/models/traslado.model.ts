@@ -6,6 +6,8 @@ export class catalogosRescate
     Piloto:Piloto[]
     Personal:Personal[] 
     vobo:VoBo []
+    Departamento: Departamento[]
+    TipoAviso: TipoAviso[]
 }
 
 export class Cat_Traslado
@@ -41,5 +43,19 @@ export class VoBo
       Nombre : string
       Apellido : string
       cargo : string
+}
+
+export class Departamento {
+
+Cod_Depto: string 
+Nombre_Depto: string
+
+}
+
+export class TipoAviso{
+
+Cod_TipoAviso: string 
+Descripcion_Aviso: string
+
 }
 

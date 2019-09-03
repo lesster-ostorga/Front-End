@@ -63,13 +63,32 @@
                             </mat-form-field>
                         </div>
 
-                        <div fxFlex="80" fxFlex.lt-sm="100">
+
+                        <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <mat-label>Dirección</mat-label>
-                                <input matInput placeholder="Ingrese la dirección" autocomplete="off" formControlName="Direccion" required>
-                                <mat-error *ngIf="Servicio.get('Direccion').invalid">Ingrese la dirección del servicio</mat-error>
+                                <mat-label>Departamento</mat-label>
+                                <mat-select required formControlName="Cod_Depto">
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Departamento" [value]="item.Cod_Depto">
+                                        {{item.Nombre_Depto}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="Servicio.get('Cod_TipoAviso').invalid">Seleccione el tipo de aviso</mat-error>
                             </mat-form-field>
                         </div>
+                        <!--<div fxFlex="20" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                    <mat-label>Municipio</mat-label>
+                                <mat-select required formControlName="Cod_Municipop">
+                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
+
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="Servicio.get('Cod_Municipop').invalid">Seleccione un Municipio</mat-error>
+                            </mat-form-field>
+                        </div>-->
+
+
 
                         <div fxFlex="60" fxFlex.lt-sm="100">
                             <mat-form-field>
@@ -80,13 +99,15 @@
                             </mat-form-field>
                         </div>
 
+
+
                         <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Forma de aviso</mat-label>
                                 <mat-select required formControlName="Cod_TipoAviso">
-                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="1">Telefono</mat-option>
-                                    <mat-option value="2">Personal</mat-option>
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.TipoAviso" [value]="item.Cod_TipoAviso">
+                                        {{item.Descripcion_Aviso}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_TipoAviso').invalid">Seleccione el tipo de aviso</mat-error>
                             </mat-form-field>
@@ -242,7 +263,8 @@
                                                         <mat-select required formControlName="Cod_Unidad">
                                                             <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                                             <mat-option *ngFor="let item of service.listCatalogoRescate.CatUnidad" [value]="item.Cod_Unidad">
-                                                                {{item.Descripcion_TipoUnidad}} - {{item.Cod_Unidad}} <!-- - {{item.Cod_Compania}}-->
+                                                                {{item.Descripcion_TipoUnidad}} - {{item.Cod_Unidad}}
+                                                                <!-- - {{item.Cod_Compania}}-->
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="project.get('Cod_Unidad').invalid">Seleccione unidad
