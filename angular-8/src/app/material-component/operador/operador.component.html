@@ -17,8 +17,7 @@
                                 <mat-label>Cia.</mat-label>
                                 <mat-select required formControlName="Cod_Compania">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania"
-                                        [value]="item">
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
                                         {{item}}
                                     </mat-option>
                                 </mat-select>
@@ -31,8 +30,7 @@
                         <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>No. Control</mat-label>
-                                <input matInput placeholder="Ingrese el No. Control" type="number" autocomplete="off"
-                                    formControlName="NoControl" required>
+                                <input matInput placeholder="Ingrese el No. Control" type="number" autocomplete="off" formControlName="NoControl" required>
                                 <mat-error *ngIf="Servicio.get('NoControl').invalid">Ingrese el número de control
                                 </mat-error>
                             </mat-form-field>
@@ -45,16 +43,14 @@
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                     <mat-option value="1">Busqueda y Rescate</mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="Servicio.get('Cod_Servicio').invalid">Por favor seleccione el tipo de
-                                    servicio
+                                <mat-error *ngIf="Servicio.get('Cod_Servicio').invalid">Por favor seleccione el tipo de servicio
                                 </mat-error>
                             </mat-form-field>
                         </div>
 
                         <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <input matInput [matDatepicker]="picker2" autocomplete="off"
-                                    placeholder="Fecha de servicio" formControlName="Fecha_Servicio" required>
+                                <input matInput [matDatepicker]="picker2" autocomplete="off" placeholder="Fecha de servicio" formControlName="Fecha_Servicio" required>
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
                                 <mat-error *ngIf="Servicio.get('Fecha_Servicio').invalid">Please ingrese la fecha
@@ -65,8 +61,7 @@
                         <div fxFlex="5" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Min. Trab.</mat-label>
-                                <input matInput placeholder="Minutos trabajados" type="number" autocomplete="off"
-                                    formControlName="Min_Trabajados" required>
+                                <input matInput placeholder="Minutos trabajados" type="number" autocomplete="off" formControlName="Min_Trabajados" required>
                                 <mat-error *ngIf="Servicio.get('Min_Trabajados').invalid">Min. Trab.
                                 </mat-error>
                             </mat-form-field>
@@ -77,23 +72,11 @@
                             <mat-form-field>
                                 <mat-label>Departamento</mat-label>
                                 <mat-select required formControlName="Cod_Depto">
-                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Departamento" [value]="item.Cod_Depto">
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Departamento" (click)="getmunicipio(item.Cod_Depto)" [value]="item.Cod_Depto">
                                         {{item.Nombre_Depto}}
                                     </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Depto').invalid">Seleccione el departamento
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div fxFlex="15" fxFlex.lt-sm="100">
-                            <mat-form-field>
-                                <mat-label>Municipio</mat-label>
-                                <mat-select required formControlName="Cod_Muni">
-                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="1">Busqueda y Rescate</mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="Servicio.get('Cod_Muni').invalid">Por favor seleccione el Municipio
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -102,7 +85,7 @@
                                 <mat-label>Área</mat-label>
                                 <mat-select required formControlName="Area">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="Urbano">Urbano</mat-option>
+                                    <mat-option value="Urbana">Urbana</mat-option>
                                     <mat-option value="Rural">Rural</mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Area').invalid">Seleccione el área
@@ -111,11 +94,25 @@
                         </div>
                         <div fxFlex="15" fxFlex.lt-sm="100">
                             <mat-form-field>
+                                <mat-label>Municipio</mat-label>
+                                <mat-select required formControlName="Cod_Muni">
+                                    <mat-option *ngFor="let item of service.municipio" (click)="getdatamunicipio(item.Cod_Muni)" [value]="item.Cod_Muni">
+                                        {{item.Nombre_Muni}}
+                                        <!-- - {{item.Cod_Compania}}-->
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="Servicio.get('Cod_Muni').invalid">Por favor seleccione el Municipio
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="15" fxFlex.lt-sm="100">
+                            <mat-form-field>
                                 <mat-label>Lugar/Ubicación</mat-label>
                                 <mat-select required formControlName="Cod_Lugar">
-                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="Urbano">Urbana</mat-option>
-                                    <mat-option value="Rural">Rural</mat-option>
+                                    <mat-option *ngFor="let item of service.area" [value]="item.Cod_Lugar">
+                                        {{item.Lugar}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Lugar').invalid">Por favor seleccione el lugar
                                 </mat-error>
@@ -125,8 +122,7 @@
                         <div fxFlex="5" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Zona</mat-label>
-                                <input matInput placeholder="Zona" type="number" autocomplete="off"
-                                    formControlName="Zona" required>
+                                <input matInput placeholder="Zona" type="number" autocomplete="off" formControlName="Zona" required>
                                 <mat-error *ngIf="Servicio.get('Zona').invalid">Zona
                                 </mat-error>
                             </mat-form-field>
@@ -142,10 +138,8 @@
                         <div fxFlex="60" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Nombre solicitante</mat-label>
-                                <input matInput placeholder="Ingrese el nombre del solicitante" autocomplete="off"
-                                    formControlName="Nombre_Solicitante" required>
-                                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese el nombre del
-                                    solicitante
+                                <input matInput placeholder="Ingrese el nombre del solicitante" autocomplete="off" formControlName="Nombre_Solicitante" required>
+                                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese el nombre del solicitante
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -169,13 +163,11 @@
                             <mat-form-field>
                                 <mat-label>Radio/Telefonista</mat-label>
                                 <mat-select required formControlName="Carnet_RadioTelefonista">
-                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Personal"
-                                        [value]="item.Carnet">
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Personal" [value]="item.Carnet">
                                         {{item.Nombre}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="Servicio.get('Carnet_RadioTelefonista').invalid">Seleccione el tipo de
-                                    aviso
+                                <mat-error *ngIf="Servicio.get('Carnet_RadioTelefonista').invalid">Seleccione el tipo de aviso
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -185,8 +177,7 @@
                                 <mat-label>Cia. Salida</mat-label>
                                 <mat-select required formControlName="Cod_Compania_Salida">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania"
-                                        [value]="item">
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
                                         {{item}}
                                     </mat-option>
                                 </mat-select>
@@ -197,8 +188,7 @@
 
                         <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <input matInput [matDatepicker]="picker3" autocomplete="off"
-                                    placeholder="Fecha de salida" formControlName="Fecha_Salida" required>
+                                <input matInput [matDatepicker]="picker3" autocomplete="off" placeholder="Fecha de salida" formControlName="Fecha_Salida" required>
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                 <mat-datepicker #picker3></mat-datepicker>
                                 <mat-error *ngIf="Servicio.get('Fecha_Salida').invalid">Please ingrese la fecha
@@ -217,8 +207,7 @@
                                 <mat-label>Cia. Entrada</mat-label>
                                 <mat-select required formControlName="Cod_Compania_Entrada">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania"
-                                        [value]="item">
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
                                         {{item}}
                                     </mat-option>
                                 </mat-select>
@@ -229,8 +218,7 @@
 
                         <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <input matInput [matDatepicker]="picker4" autocomplete="off"
-                                    placeholder="Fecha de entrada" formControlName="Fecha_Entrada" required>
+                                <input matInput [matDatepicker]="picker4" autocomplete="off" placeholder="Fecha de entrada" formControlName="Fecha_Entrada" required>
                                 <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                                 <mat-datepicker #picker4></mat-datepicker>
                                 <mat-error *ngIf="Servicio.get('Fecha_Entrada').invalid">Please ingrese la fecha
@@ -257,18 +245,14 @@
                                             <div fxFlex="30" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Nombre</mat-label>
-                                                    <input matInput autocomplete="off"
-                                                        placeholder="Ingrese el nombre del atendido"
-                                                        formControlName="Nombre" required>
-                                                    <mat-error *ngIf="project.get('Nombre').invalid">Ingrese el nombre
-                                                        del atendido</mat-error>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el nombre del atendido" formControlName="Nombre" required>
+                                                    <mat-error *ngIf="project.get('Nombre').invalid">Ingrese el nombre del atendido</mat-error>
                                                 </mat-form-field>
                                             </div>
                                             <div fxFlex="10" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Edad</mat-label>
-                                                    <input matInput placeholder="Ingrese la edad" autocomplete="off"
-                                                        type="number" formControlName="Edad" required>
+                                                    <input matInput placeholder="Ingrese la edad" autocomplete="off" type="number" formControlName="Edad" required>
                                                     <mat-error *ngIf="project.get('Edad').invalid">Ingrese la edad
                                                     </mat-error>
                                                 </mat-form-field>
@@ -278,23 +262,19 @@
                                             <div fxFlex="30" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Domicilio.</mat-label>
-                                                    <input matInput placeholder="Ingrese el domicilio"
-                                                        autocomplete="off" formControlName="Domicilio" required>
-                                                    <mat-error *ngIf="project.get('Domicilio').invalid">Ingrese el
-                                                        domicilio</mat-error>
+                                                    <input matInput placeholder="Ingrese el domicilio" autocomplete="off" formControlName="Domicilio" required>
+                                                    <mat-error *ngIf="project.get('Domicilio').invalid">Ingrese el domicilio
+                                                    </mat-error>
                                                 </mat-form-field>
                                             </div>
 
                                             <div fxFlex="20" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Traslado</mat-label>
-                                                    <mat-select required formControlName="Cod_Ubi_Traslado"
-                                                        (change)="Cod_Compania($event.target.value)" required>
+                                                    <mat-select required formControlName="Cod_Ubi_Traslado" (change)="Cod_Compania($event.target.value)" required>
                                                         <mat-option>-- Seleccione un elemento de la lista --
                                                         </mat-option>
-                                                        <mat-option
-                                                            *ngFor="let item of service.listCatalogoRescate.CatTraslado"
-                                                            [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
+                                                        <mat-option *ngFor="let item of service.listCatalogoRescate.CatTraslado" [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
                                                             {{item.Descripcion}}
                                                         </mat-option>
                                                     </mat-select>
@@ -303,8 +283,7 @@
                                                 </mat-form-field>
                                             </div>
                                             <div fxFlex="5%" fxFlex.lt-sm="100">
-                                                <button mat-raised-button color="warn"
-                                                    (click)="deletePerAte(Servicio.controls.Persona_Atendida, j)">Eliminar</button>
+                                                <button mat-raised-button color="warn" (click)="deletePerAte(Servicio.controls.Persona_Atendida, j)">Eliminar</button>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -314,8 +293,7 @@
                         </div>
 
                         <div fxFlex.gt-sm="100%" fxFlex="100">
-                            <button mat-raised-button color="primary"
-                                (click)="addNewPerAte(Servicio.controls.Persona_Atendida)">Agregar Persona</button>
+                            <button mat-raised-button color="primary" (click)="addNewPerAte(Servicio.controls.Persona_Atendida)">Agregar Persona</button>
                         </div>
 
                     </div>
@@ -341,15 +319,12 @@
                                                         <mat-select required formControlName="Cod_Unidad">
                                                             <mat-option>-- Seleccione un elemento de la lista --
                                                             </mat-option>
-                                                            <mat-option
-                                                                *ngFor="let item of service.listCatalogoRescate.CatUnidad"
-                                                                [value]="item.Cod_Unidad">
+                                                            <mat-option *ngFor="let item of service.listCatalogoRescate.CatUnidad" [value]="item.Cod_Unidad">
                                                                 {{item.Descripcion_TipoUnidad}} - {{item.Cod_Unidad}}
                                                                 <!-- - {{item.Cod_Compania}}-->
                                                             </mat-option>
                                                         </mat-select>
-                                                        <mat-error *ngIf="project.get('Cod_Unidad').invalid">Seleccione
-                                                            unidad
+                                                        <mat-error *ngIf="project.get('Cod_Unidad').invalid">Seleccione unidad
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
@@ -359,9 +334,7 @@
                                                         <mat-select required formControlName="Carnet_Piloto">
                                                             <mat-option>-- Seleccione un elemento de la lista --
                                                             </mat-option>
-                                                            <mat-option
-                                                                *ngFor="let item of service.listCatalogoRescate.Piloto"
-                                                                [value]="item.Carnet">
+                                                            <mat-option *ngFor="let item of service.listCatalogoRescate.Piloto" [value]="item.Carnet">
                                                                 {{item.Nombre}}
                                                             </mat-option>
                                                         </mat-select>
@@ -371,23 +344,20 @@
                                                     </mat-form-field>
                                                 </div>
                                                 <div fxFlex="20" fxFlex.lt-sm="100">
-                                                    <button mat-raised-button color="warn"
-                                                        (click)="deleteUniAsi(Servicio.controls.Unidad_Asiste, j)">Eliminar</button>
+                                                    <button mat-raised-button color="warn" (click)="deleteUniAsi(Servicio.controls.Unidad_Asiste, j)">Eliminar</button>
                                                 </div>
                                             </div>
                                         </fieldset>
                                         <br>
                                     </div>
                                     <br>
-                                    <button mat-raised-button color="primary"
-                                        (click)="addNewUniAsi(Servicio.controls.Unidad_Asiste)">Agregar Unidad</button>
+                                    <button mat-raised-button color="primary" (click)="addNewUniAsi(Servicio.controls.Unidad_Asiste)">Agregar Unidad</button>
                                 </div>
                             </td>
                             <td>
                                 <div formArrayName="Persona_Destacada">
                                     <mat-card-title>Personal destacado</mat-card-title>
-                                    <div
-                                        *ngFor="let project of Servicio.get('Persona_Destacada').controls; let j=index">
+                                    <div *ngFor="let project of Servicio.get('Persona_Destacada').controls; let j=index">
                                         <fieldset>
                                             <legend>
                                                 <h4>Personal No. {{j+1}}</h4>
@@ -397,20 +367,16 @@
                                                     <mat-form-field>
                                                         <mat-label>Bombero</mat-label>
                                                         <mat-select required formControlName="Carnet">
-                                                            <mat-option
-                                                                *ngFor="let item of service.listCatalogoRescate.Personal"
-                                                                [value]="item.Carnet">
+                                                            <mat-option *ngFor="let item of service.listCatalogoRescate.Personal" [value]="item.Carnet">
                                                                 {{item.Nombre}}
                                                             </mat-option>
                                                         </mat-select>
-                                                        <mat-error *ngIf="project.get('Carnet').invalid">Seleccione el
-                                                            personal destacado
+                                                        <mat-error *ngIf="project.get('Carnet').invalid">Seleccione el personal destacado
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
                                                 <div fxFlex="20" fxFlex.lt-sm="100">
-                                                    <button mat-raised-button color="warn"
-                                                        (click)="deletePerDes(Servicio.controls.Persona_Destacada, j)">Eliminar</button>
+                                                    <button mat-raised-button color="warn" (click)="deletePerDes(Servicio.controls.Persona_Destacada, j)">Eliminar</button>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -418,8 +384,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <button mat-raised-button color="primary"
-                                    (click)="addNewPerDes(Servicio.controls.Persona_Destacada)">Agregar
+                                <button mat-raised-button color="primary" (click)="addNewPerDes(Servicio.controls.Persona_Destacada)">Agregar
                                     Personal</button>
                             </td>
                         </tr>
@@ -430,8 +395,7 @@
                         <div fxFlex="100%" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Observaciones</mat-label>
-                                <textarea matInput style="height: 100px" placeholder="Ingrese las observaciones"
-                                    autocomplete="off" formControlName="Observaciones" required></textarea>
+                                <textarea matInput style="height: 100px" placeholder="Ingrese las observaciones" autocomplete="off" formControlName="Observaciones" required></textarea>
                                 <mat-error *ngIf="Servicio.get('Observaciones').invalid">Ingrese las obsercaciones
                                 </mat-error>
                             </mat-form-field>
@@ -441,8 +405,7 @@
                             <mat-form-field>
                                 <mat-label>Formulado Por</mat-label>
                                 <mat-select required formControlName="Carnet_FormuladoPor">
-                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Personal"
-                                        [value]="item.Carnet">
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Personal" [value]="item.Carnet">
                                         {{item.Nombre}}
                                     </mat-option>
                                 </mat-select>
@@ -456,8 +419,7 @@
                                 <mat-label>Conforme Piloto</mat-label>
                                 <mat-select required formControlName="Carnet_ConformePiloto">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Piloto"
-                                        [value]="item.Carnet">
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Piloto" [value]="item.Carnet">
                                         {{item.Nombre}}
                                     </mat-option>
                                 </mat-select>
@@ -470,8 +432,7 @@
                             <mat-form-field>
                                 <mat-label>Vo. Bo.</mat-label>
                                 <mat-select required formControlName="Carnet_VoBo">
-                                    <mat-option *ngFor="let item of service.listCatalogoRescate.vobo"
-                                        [value]="item.Carnet">
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.vobo" [value]="item.Carnet">
                                         {{item.Nombre}}
                                     </mat-option>
                                 </mat-select>
@@ -481,8 +442,7 @@
 
                         <div fxFlex="25" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <input matInput [matDatepicker]="picker5" autocomplete="off"
-                                    placeholder="Fecha para firma" formControlName="Fecha_Firma" required>
+                                <input matInput [matDatepicker]="picker5" autocomplete="off" placeholder="Fecha para firma" formControlName="Fecha_Firma" required>
                                 <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                                 <mat-datepicker #picker5></mat-datepicker>
                                 <mat-error *ngIf="Servicio.get('Fecha_Firma').invalid">Please ingrese la fecha

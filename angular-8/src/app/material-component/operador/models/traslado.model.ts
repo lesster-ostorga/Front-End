@@ -1,4 +1,4 @@
-export class catalogosRescate
+export class catalogosRescate //datos generales sin parametros
 {
     
     CatTraslado: Cat_Traslado[] 
@@ -8,7 +8,7 @@ export class catalogosRescate
     vobo:VoBo []
     Departamento: Departamento[]
     TipoAviso: TipoAviso[]
-    Municipio:Municipio[]
+
 }
 
 export class Cat_Traslado
@@ -64,6 +64,13 @@ export class Municipio {
 
     Cod_Muni: string 
     Nombre_Muni: string
+    
+  }
+
+  export class Area {
+
+    Cod_Lugar: string 
+    Lugar: string
     
   }
 

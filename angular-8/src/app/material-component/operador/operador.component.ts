@@ -7,6 +7,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 import { LoginService } from '../../core/services/login.service';
 import {Serviciotraslado} from '../operador/services/traslado.service';
+import { Municipio, Cat_Traslado } from './models/traslado.model';
+
+
 @Component({
   selector: 'app-operador',
   templateUrl: './operador.component.html',
@@ -165,6 +168,27 @@ export class OperadorComponent implements OnInit {
   ngOnInit() {
     
   }
+
+  getmunicipio(cod_depto: string ){
+//alert('hola departamento ' +cod_depto);
+  this.service.muni(cod_depto);
+  }
+
+  getdatamunicipio(cod_muni: string ){
+    //alert('hola departamento ' +cod_depto);
+      this.service.datamuni(cod_muni, this.Servicio.controls.Area.value);
+      }
+
+      getdatamunicipio2(cod_muni: string ){
+        //alert('hola departamento ' +cod_depto);
+
+        if(this.Servicio.controls.cod_muni.value != null){
+          this.service.datamuni(this.Servicio.controls.Area.value, this.Servicio.controls.cod_muni.value);
+        }
+        
+          }
+    
+      
 
 
   submit() {
