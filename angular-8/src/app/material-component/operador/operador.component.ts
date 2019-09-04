@@ -23,9 +23,9 @@ export class OperadorComponent implements OnInit {
   seconds = false;
   viewMsg = false;
   msgRes: string;
-  alertType: string = "success";
+  alertType = 'success';
   Servicio: FormGroup;
-  msgLoading = "Guardar Servicio";
+  msgLoading = 'Guardar Servicio';
   viewSpinner = false;
   data = {
     Per_Aten: [
@@ -49,7 +49,8 @@ export class OperadorComponent implements OnInit {
     ]
   };
 
-  constructor(private fb: FormBuilder, private calendar: NgbCalendar, private rescateService: RescateService, private loginService: LoginService,private service: Serviciotraslado) {
+  constructor(private fb: FormBuilder, private calendar: NgbCalendar,
+     private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado) {
     this.service.TrasladoList();
     this.Servicio = this.fb.group({
       NoControl: ['', [Validators.required]],
@@ -60,41 +61,41 @@ export class OperadorComponent implements OnInit {
       Nombre_Solicitante: ['', [Validators.required]],
       Cod_Depto :['', [Validators.required]],
       Cod_Muni :['', [Validators.required]],
-      Area :['', [Validators.required]],
+      Area : ['', [Validators.required]],
       Cod_Lugar :['', [Validators.required]],
-      Zona :['', [Validators.required]],
+      Zona : [''],
       Direccion: ['', [Validators.required]],
       Cod_TipoAviso: ['', [Validators.required]],
       Cod_Compania_Salida: ['', [Validators.required]],
-      Fecha_Salida: ["", [Validators.required]],
+      Fecha_Salida: ['', [Validators.required]],
       Hora_Salida: [this.time, [Validators.required]],
       Cod_Compania_Entrada: ['', [Validators.required]],
       Fecha_Entrada: ['', [Validators.required]],
       Hora_Entrada: [this.time, [Validators.required]],
       Carnet_RadioTelefonista: ['', [Validators.required]],
       Observaciones: ['', [Validators.required]],
-      //Razon: ['S/R', [Validators.required]],
+      // Razon: ['S/R', [Validators.required]],
       Carnet_FormuladoPor: ['', [Validators.required]],
       Carnet_ConformePiloto: ['', [Validators.required]],
       Carnet_VoBo: ['', [Validators.required]],
       Fecha_Firma: ['', [Validators.required]],
-      //Usuario_Registra: [this.loginService.currentUserValue.usuario.toUpperCase(), [Validators.required]],
-      //Fecha_Imprime: ['', [Validators.required]],
+      // Usuario_Registra: [this.loginService.currentUserValue.usuario.toUpperCase(), [Validators.required]],
+      // Fecha_Imprime: ['', [Validators.required]],
       Persona_Atendida: this.fb.array([]),
       Unidad_Asiste: this.fb.array([]),
       Persona_Destacada: this.fb.array([])
     });
     /*devolvemr un array con los cod_compania de usuario */
-    //console.log(this.loginService.currentUserValue.cod_compania)
+    // console.log(this.loginService.currentUserValue.cod_compania)
     this.setDataInicial();
 
   }
-//es solo prueba de versionamiento 
+// es solo prueba de versionamiento
 
-  //Angular Reactive Forms with nested Form Arrays
-  //https://stackblitz.com/edit/angular-dffny7?file=app/app.component.html
-  //https://ng-bootstrap.github.io/#/components/timepicker/examples
-  //https://material.angular.io/components/categories
+  // Angular Reactive Forms with nested Form Arrays
+  // https://stackblitz.com/edit/angular-dffny7?file=app/app.component.html
+  // https://ng-bootstrap.github.io/#/components/timepicker/examples
+  // https://material.angular.io/components/categories
 
 
   addNewPerAte(control) {
@@ -170,34 +171,38 @@ export class OperadorComponent implements OnInit {
   }
 
   getmunicipio(cod_depto: string ){
-//alert('hola departamento ' +cod_depto);
+// alert('hola departamento ' +cod_depto);
   this.service.muni(cod_depto);
   }
 
   getdatamunicipio(cod_muni: string ){
-    //alert('hola departamento ' +cod_depto);
+    // alert('hola departamento ' +cod_depto);
+    if (this.Servicio.controls.Area.value !== '') {
       this.service.datamuni(cod_muni, this.Servicio.controls.Area.value);
+    } else {
+      alert('selecione el area que desea');
+    }
       }
 
-      getdatamunicipio2(cod_muni: string ){
-        //alert('hola departamento ' +cod_depto);
+      getdatamunicipio2() {
+        // alert('hola departamento ' +cod_depto);
 
-        if(this.Servicio.controls.cod_muni.value != null){
-          this.service.datamuni(this.Servicio.controls.Area.value, this.Servicio.controls.cod_muni.value);
+        if (this.Servicio.controls.Cod_Muni.value !== '') {
+          this.service.datamuni(this.Servicio.controls.Cod_Muni.value, this.Servicio.controls.Area.value);
+        } else {
+
         }
-        
-          }
-    
-      
 
+          }
 
   submit() {
-    //this.showToast();
+    // this.showToast();
     // Make sure to create a deep copy of the form-model
     this.msgRes = "";
 
     // stop here if form is invalid
-    if (this.Servicio.invalid || this.Servicio.controls.Persona_Atendida.invalid || this.Servicio.controls.Unidad_Asiste.invalid || this.Servicio.controls.Persona_Destacada.invalid) {
+    if (this.Servicio.invalid || this.Servicio.controls.Persona_Atendida.invalid
+       || this.Servicio.controls.Unidad_Asiste.invalid || this.Servicio.controls.Persona_Destacada.invalid) {
       this.viewMsg = false;
       return;
     }
@@ -215,10 +220,10 @@ export class OperadorComponent implements OnInit {
           this.msgLoading = "Guardar Servicio";
           this.msgRes = data.msgRespuesta;
           this.Servicio.reset();
-          //console.log(data);
+          // console.log(data);
         },
         (error: HttpErrorResponse) => {
-          //console.log(error);
+          // console.log(error);
           this.viewMsg = true;
           this.alertType = "danger";
           this.viewSpinner = false;
@@ -226,12 +231,12 @@ export class OperadorComponent implements OnInit {
           this.msgRes = error.error.codError + ": " + error.error.msgRespuesta;
         });
     // Do useful stuff with the gathered data
-    //console.log(this.Servicio.value);
+    // console.log(this.Servicio.value);
 
   }
 
   showToast() {
-    //this.toastr.success('asdfasdf');
+    // this.toastr.success('asdfasdf');
   }
 
   getErrorMessage(form: FormGroup) {

@@ -15,9 +15,9 @@ export class Serviciotraslado {
 
   readonly url = 'http://localhost:49220/api/catalogos/';
   listCatalogoRescate: catalogosRescate;
-  //listVoBo : Municipio[];
-  //listUnidades : Traslado[];
-  //listPilotos : Traslado[];
+  // listVoBo : Municipio[];
+  // listUnidades : Traslado[];
+  // listPilotos : Traslado[];
   // cod: LoginService;
 
   municipio: Municipio[];
@@ -35,28 +35,28 @@ export class Serviciotraslado {
   TrasladoList() {
 
     this.http.get(this.url+'general', this.httpOptions).toPromise().then(result => this.listCatalogoRescate = result as catalogosRescate);
-    
 
-    //this.http.get(this.url + 'VoBo?id=44').toPromise().then(result=>this.listVoBo = result as Traslado[]);
-    //his.http.get(this.url + 'Unidades?id=44').toPromise().then(result=>this.listUnidades = result as Traslado[]);
-    //this.http.get(this.url + 'Pilotos?id=44').toPromise().then(result=>this.listPilotos = result as Traslado[]);
-    //Prueba de api jalando datos 
-    //this.http.get(this.url + 'VoBo?id='+this.cod.currentUserValue.cod_compania).toPromise().then(result=>this.listVoBo = result as Traslado[])
+    // this.http.get(this.url + 'VoBo?id=44').toPromise().then(result=>this.listVoBo = result as Traslado[]);
+    // his.http.get(this.url + 'Unidades?id=44').toPromise().then(result=>this.listUnidades = result as Traslado[]);
+    // this.http.get(this.url + 'Pilotos?id=44').toPromise().then(result=>this.listPilotos = result as Traslado[]);
+    // Prueba de api jalando datos 
+    // tslint:disable-next-line: max-line-length
+    // this.http.get(this.url + 'VoBo?id='+this.cod.currentUserValue.cod_compania).toPromise().then(result=>this.listVoBo = result as Traslado[])
 
   }
 
 
   muni(cod: string) {
 
-   this.http.get(this.url+'Municipios?id='+cod, this.httpOptions).toPromise().then(result => this.municipio = result as Municipio[]);
+   this.http.get(this.url + 'Municipios?id=' + cod, this.httpOptions)
+   .toPromise().then(result => this.municipio = result as Municipio[]);
   }
 
-  datamuni(cod: string, area:any) {
+  datamuni(cod: string, area: any) {
 
-    this.http.get(this.url+'datosMunicipios?id='+cod+'&area='+area, this.httpOptions).toPromise().then(result => this.area = result as Area[]);
+    this.http.get(this.url + 'datosMunicipios?id=' + cod + '&area=' + area, this.httpOptions)
+    .toPromise().then(result => this.area = result as Area[]);
    }
-
-  
 
 }
 

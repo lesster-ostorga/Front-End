@@ -85,8 +85,8 @@
                                 <mat-label>Área</mat-label>
                                 <mat-select required formControlName="Area">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="Urbana">Urbana</mat-option>
-                                    <mat-option value="Rural">Rural</mat-option>
+                                    <mat-option (click)="getdatamunicipio2()" value="Urbana">Urbana</mat-option>
+                                    <mat-option (click)="getdatamunicipio2()" value="Rural">Rural</mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Area').invalid">Seleccione el área
                                 </mat-error>
@@ -122,7 +122,7 @@
                         <div fxFlex="5" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Zona</mat-label>
-                                <input matInput placeholder="Zona" type="number" autocomplete="off" formControlName="Zona" required>
+                                <input matInput placeholder="Zona" type="number" autocomplete="off" formControlName="Zona">
                                 <mat-error *ngIf="Servicio.get('Zona').invalid">Zona
                                 </mat-error>
                             </mat-form-field>
