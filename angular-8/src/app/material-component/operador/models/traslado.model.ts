@@ -8,6 +8,7 @@ export class catalogosRescate
     vobo:VoBo []
     Departamento: Departamento[]
     TipoAviso: TipoAviso[]
+    Municipio:Municipio[]
 }
 
 export class Cat_Traslado
@@ -58,4 +59,12 @@ Cod_TipoAviso: string
 Descripcion_Aviso: string
 
 }
+
+export class Municipio {
+
+    Cod_Muni: string 
+    Nombre_Muni: string
+    
+  }
+
 

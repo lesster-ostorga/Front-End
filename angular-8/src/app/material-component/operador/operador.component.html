@@ -75,9 +75,9 @@
                                 <mat-error *ngIf="Servicio.get('Cod_TipoAviso').invalid">Seleccione el tipo de aviso</mat-error>
                             </mat-form-field>
                         </div>
-                        <!--<div fxFlex="20" fxFlex.lt-sm="100">
+                        <div fxFlex="20" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                    <mat-label>Municipio</mat-label>
+                                <mat-label>Municipio</mat-label>
                                 <mat-select required formControlName="Cod_Municipop">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
                                     <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
@@ -86,7 +86,29 @@
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Municipop').invalid">Seleccione un Municipio</mat-error>
                             </mat-form-field>
-                        </div>-->
+                        </div>
+                        <div fxFlex="20" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                <mat-label>Area</mat-label>
+                                <mat-select required formControlName="Cod_Area">
+                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
+
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="Servicio.get('Cod_Municipop').invalid">Seleccione un Municipio</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="80" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                <mat-label>Dirección</mat-label>
+                                <input matInput placeholder="Ingrese la dirección" autocomplete="off" formControlName="Direccion" required>
+                                <mat-error *ngIf="Servicio.get('Direccion').invalid">Ingrese la dirección del servicio</mat-error>
+                            </mat-form-field>
+                        </div>
+
+
 
 
 
