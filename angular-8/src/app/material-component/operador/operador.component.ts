@@ -47,16 +47,19 @@ export class OperadorComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder, private calendar: NgbCalendar, private rescateService: RescateService, private loginService: LoginService,private service: Serviciotraslado) {
-
+    this.service.TrasladoList();
     this.Servicio = this.fb.group({
-      Cod_Area :['', [Validators.required]],
-     Cod_Municipop :['', [Validators.required]],
       NoControl: ['', [Validators.required]],
       Cod_Compania: ['', [Validators.required]],
       Cod_Servicio: ['', [Validators.required]],
       Min_Trabajados: ['', [Validators.required]],
       Fecha_Servicio: ['', [Validators.required]],
       Nombre_Solicitante: ['', [Validators.required]],
+      Cod_Depto :['', [Validators.required]],
+      Cod_Muni :['', [Validators.required]],
+      Area :['', [Validators.required]],
+      Cod_Lugar :['', [Validators.required]],
+      Zona :['', [Validators.required]],
       Direccion: ['', [Validators.required]],
       Cod_TipoAviso: ['', [Validators.required]],
       Cod_Compania_Salida: ['', [Validators.required]],
@@ -79,8 +82,8 @@ export class OperadorComponent implements OnInit {
       Persona_Destacada: this.fb.array([])
     });
     /*devolvemr un array con los cod_compania de usuario */
-    console.log(this.loginService.currentUserValue.cod_compania)
-    this.setProyects();
+    //console.log(this.loginService.currentUserValue.cod_compania)
+    this.setDataInicial();
 
   }
 //es solo prueba de versionamiento 
@@ -132,7 +135,7 @@ export class OperadorComponent implements OnInit {
     control.removeAt(index)
   }
 
-  setProyects() {
+  setDataInicial() {
     let controlPer_Aten = <FormArray>this.Servicio.controls.Persona_Atendida;
     this.data.Per_Aten.forEach(x => {
       controlPer_Aten.push(this.fb.group({
@@ -160,7 +163,7 @@ export class OperadorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.TrasladoList();
+    
   }
 
 
