@@ -67,7 +67,7 @@ export class Municipio {
     
   }
 
-  export class Area {
+  export class Lugar {
 
     Cod_Lugar: string 
     Lugar: string

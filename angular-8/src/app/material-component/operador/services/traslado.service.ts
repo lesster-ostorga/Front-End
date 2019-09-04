@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { catalogosRescate, Municipio, Area } from '../models/traslado.model';
+import { catalogosRescate, Municipio, Lugar } from '../models/traslado.model';
 import { User } from '../../../core/models/user';
 import { fbind } from 'q';
 import { LoginService } from '../../../core/services/login.service'
@@ -21,7 +21,7 @@ export class Serviciotraslado {
   // cod: LoginService;
 
   municipio: Municipio[];
-  area: Area[];
+  lugar: Lugar[];
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
    // Http Headers
@@ -47,15 +47,14 @@ export class Serviciotraslado {
 
 
   muni(cod: string) {
-
+   this.lugar = [];
    this.http.get(this.url + 'Municipios?id=' + cod, this.httpOptions)
    .toPromise().then(result => this.municipio = result as Municipio[]);
   }
 
   datamuni(cod: string, area: any) {
-
     this.http.get(this.url + 'datosMunicipios?id=' + cod + '&area=' + area, this.httpOptions)
-    .toPromise().then(result => this.area = result as Area[]);
+    .toPromise().then(result => this.lugar = result as Lugar[]);
    }
 
 }
