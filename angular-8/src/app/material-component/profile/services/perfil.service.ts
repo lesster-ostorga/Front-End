@@ -31,9 +31,11 @@ export class ServicioPerfil {
 
   UsuarioList() {
 
-    let storedToken = sessionStorage.getItem("usuario");
+    //var precio=sessionStorage.getItem(this.loginService.loginUser.name);
 
-    this.http.get(this.url+ 'User1' , this.httpOptions).toPromise().then(result => this.perfil = result as Perfil);
+    //let storedToken = sessionStorage.getItem("usuario");
+
+    this.http.get(this.url+this.loginService.currentUserValue.usuario  , this.httpOptions).toPromise().then(result => this.perfil = result as Perfil);
 
 
     // this.http.get(this.url + 'VoBo?id=44').toPromise().then(result=>this.listVoBo = result as Traslado[]);
