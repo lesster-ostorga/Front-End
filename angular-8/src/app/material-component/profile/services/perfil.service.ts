@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { catalogosRescate, Municipio, Lugar } from '../models/traslado.model';
+import { Perfil } from '../models/perfil.model';
 import { User } from '../../../core/models/user';
 import { fbind } from 'q';
 import { LoginService } from '../../../core/services/login.service'
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 
 
 @Injectable({
@@ -11,17 +12,13 @@ import { LoginService } from '../../../core/services/login.service'
 })
 
 
-export class Serviciotraslado {
+export class ServicioPerfil {
 
-  readonly url = 'https://umgdemo.azurewebsites.net/api/catalogos/';
-  listCatalogoRescate: catalogosRescate;
-  // listVoBo : Municipio[];
-  // listUnidades : Traslado[];
-  // listPilotos : Traslado[];
-  // cod: LoginService;
+  public tokenKey: string = 'usuario';
 
-  municipio: Municipio[];
-  lugar: Lugar[];
+  readonly url = 'http://localhost:49220/api/usuarios/';
+  perfil: Perfil;
+ 
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
    // Http Headers
@@ -32,9 +29,14 @@ export class Serviciotraslado {
     })
   }
 
-  TrasladoList() {
+  UsuarioList() {
 
-    this.http.get(this.url+'general', this.httpOptions).toPromise().then(result => this.listCatalogoRescate = result as catalogosRescate);
+    //var precio=sessionStorage.getItem(this.loginService.loginUser.name);
+
+    //let storedToken = sessionStorage.getItem("usuario");
+
+    this.http.get(this.url+this.loginService.currentUserValue.usuario  , this.httpOptions).toPromise().then(result => this.perfil = result as Perfil);
+
 
     // this.http.get(this.url + 'VoBo?id=44').toPromise().then(result=>this.listVoBo = result as Traslado[]);
     // his.http.get(this.url + 'Unidades?id=44').toPromise().then(result=>this.listUnidades = result as Traslado[]);
@@ -42,22 +44,9 @@ export class Serviciotraslado {
     // Prueba de api jalando datos 
     // tslint:disable-next-line: max-line-length
     // this.http.get(this.url + 'VoBo?id='+this.cod.currentUserValue.cod_compania).toPromise().then(result=>this.listVoBo = result as Traslado[])
-
   }
 
-  
 
-
-  muni(cod: string) {
-   this.lugar = [];
-   this.http.get(this.url + 'Municipios?id=' + cod, this.httpOptions)
-   .toPromise().then(result => this.municipio = result as Municipio[]);
-  }
-
-  datamuni(cod: string, area: any) {
-    this.http.get(this.url + 'datosMunicipios?id=' + cod + '&area=' + area, this.httpOptions)
-    .toPromise().then(result => this.lugar = result as Lugar[]);
-   }
 
 }
 
