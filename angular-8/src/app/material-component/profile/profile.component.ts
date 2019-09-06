@@ -1,7 +1,7 @@
 import { ProfileService } from './../../core/services/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-
+import{ServicioPerfil} from '../profile/services/perfil.service'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -9,13 +9,24 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private profile: ProfileService) { }
+  constructor( private fb: FormBuilder, private profile: ProfileService, private serviceP: ServicioPerfil ) { 
 
+    
+  }
+
+ 
   ngOnInit() {
-    this.getDataUser();
+   
+    this.serviceP.UsuarioList();
+    //this.getDataUser();
+  
   }
-  getDataUser(){
-    this.profile.getInfoUser().subscribe((respuesta)=>console.log(respuesta));
-  }
+ // getDataUser(){
+ //   this.profile.getInfoUser().subscribe((respuesta)=>console.log(respuesta));
+ // }
+
+
+ 
+
 
 }
