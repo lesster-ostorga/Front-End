@@ -34,7 +34,7 @@ export const MaterialRoutes: Routes = [
     path: 'reportes',
     component: ReportesComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Button', titleI18n: 'button', data: { roles: [Role.Servicios] } }
+    data: { title: 'Button', titleI18n: 'button', data: { roles: [Role.Servicios, Role.Administrador] } }
   },
   {
     path: 'menu',
@@ -44,7 +44,7 @@ export const MaterialRoutes: Routes = [
     path: 'operador',
     component: OperadorComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Button', titleI18n: 'button', data: { roles: [Role.Operador] } }
+    data: { title: 'Button', titleI18n: 'button', data: { roles: [Role.Operador, Role.Servicios, Role.Administrador] } }
   },
   {
     path: 'profile',
@@ -85,7 +85,9 @@ export const MaterialRoutes: Routes = [
   },
   {
     path: 'snackbar',
-    component: SnackbarComponent
+    component: SnackbarComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Button', titleI18n: 'button', data: { roles: [Role.Administrador] } }
   },
   {
     path: 'slider',

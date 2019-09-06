@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { NgbDateStruct, NgbCalendar, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RescateService } from '../../core/services/rescate.service.';
 import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 import { LoginService } from '../../core/services/login.service';
-import {Serviciotraslado} from '../operador/services/traslado.service';
-import { Municipio, Cat_Traslado } from './models/traslado.model';
+import { Serviciotraslado } from '../operador/services/traslado.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,6 +20,7 @@ import { Municipio, Cat_Traslado } from './models/traslado.model';
 export class OperadorComponent implements OnInit {
 
   time = { hour: 0, minute: 0, second: 0 };
+  OcultaPerAtendida = false;
   seconds = false;
   viewMsg = false;
   msgRes: string;
@@ -49,27 +50,29 @@ export class OperadorComponent implements OnInit {
     ]
   };
 
+
   constructor(private fb: FormBuilder, private calendar: NgbCalendar,
-     private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado) {
+    private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado, private ToastrService: ToastrService) {
     this.service.TrasladoList();
     this.Servicio = this.fb.group({
       NoControl: ['', [Validators.required]],
-      Cod_Compania: ['', [Validators.required]],
+      Cod_Compania: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Cod_Servicio: ['', [Validators.required]],
+      Cod_Clase_Servicio: ['', [Validators.required]],
       Min_Trabajados: ['', [Validators.required]],
       Fecha_Servicio: ['', [Validators.required]],
       Nombre_Solicitante: ['', [Validators.required]],
-      Cod_Depto :['', [Validators.required]],
-      Cod_Muni :['', [Validators.required]],
-      Area : ['', [Validators.required]],
-      Cod_Lugar :['', [Validators.required]],
-      Zona : [''],
+      Cod_Depto: ['1302', [Validators.required]],
+      Cod_Muni: ['', [Validators.required]],
+      Area: ['', [Validators.required]],
+      Cod_Lugar: [''],
+      Zona: [''],
       Direccion: ['', [Validators.required]],
       Cod_TipoAviso: ['', [Validators.required]],
-      Cod_Compania_Salida: ['', [Validators.required]],
+      Cod_Compania_Salida: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Fecha_Salida: ['', [Validators.required]],
       Hora_Salida: [this.time, [Validators.required]],
-      Cod_Compania_Entrada: ['', [Validators.required]],
+      Cod_Compania_Entrada: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Fecha_Entrada: ['', [Validators.required]],
       Hora_Entrada: [this.time, [Validators.required]],
       Carnet_RadioTelefonista: ['', [Validators.required]],
@@ -88,9 +91,10 @@ export class OperadorComponent implements OnInit {
     /*devolvemr un array con los cod_compania de usuario */
     // console.log(this.loginService.currentUserValue.cod_compania)
     this.setDataInicial();
+    this.getmunicipio("1302");
 
   }
-// es solo prueba de versionamiento
+  // es solo prueba de versionamiento
 
   // Angular Reactive Forms with nested Form Arrays
   // https://stackblitz.com/edit/angular-dffny7?file=app/app.component.html
@@ -135,9 +139,6 @@ export class OperadorComponent implements OnInit {
     control.removeAt(index)
   }
 
-  deletePerAten(control, index) {
-    control.removeAt(index)
-  }
 
   setDataInicial() {
     let controlPer_Aten = <FormArray>this.Servicio.controls.Persona_Atendida;
@@ -167,33 +168,40 @@ export class OperadorComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
-  getmunicipio(cod_depto: string ){
-// alert('hola departamento ' +cod_depto);
-  this.service.muni(cod_depto);
-  }
-
-  getdatamunicipio(cod_muni: string ){
+  getmunicipio(cod_depto: string) {
     // alert('hola departamento ' +cod_depto);
+    let CodMuni = <FormControl>this.Servicio.controls.Cod_Muni;
+    let CodLugar = <FormControl>this.Servicio.controls.Cod_Lugar;
+    let CodArea = <FormControl>this.Servicio.controls.Area;
+    CodMuni.setValue("");
+    CodLugar.setValue("");
+    CodArea.setValue("");
+    this.service.muni(cod_depto);
+  }
+
+  getdatamunicipio(cod_muni: string) {
+    // alert('hola departamento ' +cod_depto);
+    let CodLugar = <FormControl>this.Servicio.controls.Cod_Lugar;
+    CodLugar.setValue("");
     if (this.Servicio.controls.Area.value !== '') {
       this.service.datamuni(cod_muni, this.Servicio.controls.Area.value);
-    } else {
-      alert('selecione el area que desea');
     }
-      }
+  }
 
-      getdatamunicipio2() {
-        // alert('hola departamento ' +cod_depto);
+  getdatamunicipio2() {
+    // alert('hola departamento ' +cod_depto);
+    let CodLugar = <FormControl>this.Servicio.controls.Cod_Lugar;
+    CodLugar.setValue("");
+    if (this.Servicio.controls.Cod_Muni.value !== '') {
+      this.service.datamuni(this.Servicio.controls.Cod_Muni.value, this.Servicio.controls.Area.value);
+    } else {
 
-        if (this.Servicio.controls.Cod_Muni.value !== '') {
-          this.service.datamuni(this.Servicio.controls.Cod_Muni.value, this.Servicio.controls.Area.value);
-        } else {
+    }
 
-        }
-
-          }
+  }
 
   submit() {
     // this.showToast();
@@ -202,7 +210,7 @@ export class OperadorComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.Servicio.invalid || this.Servicio.controls.Persona_Atendida.invalid
-       || this.Servicio.controls.Unidad_Asiste.invalid || this.Servicio.controls.Persona_Destacada.invalid) {
+      || this.Servicio.controls.Unidad_Asiste.invalid || this.Servicio.controls.Persona_Destacada.invalid) {
       this.viewMsg = false;
       return;
     }
@@ -220,19 +228,21 @@ export class OperadorComponent implements OnInit {
           this.msgLoading = "Guardar Servicio";
           this.msgRes = data.msgRespuesta;
           this.Servicio.reset();
-          // console.log(data);
+          this.ToastrService.success(this.msgRes, "Servicio Guardado", {
+            progressBar: true
+          });
         },
         (error: HttpErrorResponse) => {
-          // console.log(error);
           this.viewMsg = true;
           this.alertType = "danger";
           this.viewSpinner = false;
           this.msgLoading = "Guardar Servicio";
-          this.msgRes = error.error.codError + ": " + error.error.msgRespuesta;
+          console.log(error);
+          this.ToastrService.error(error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.msgRespuesta, "Error en operación", {
+            progressBar: true
+          });
+          this.msgRes = error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.codError + ": " + error.error.msgRespuesta;
         });
-    // Do useful stuff with the gathered data
-    // console.log(this.Servicio.value);
-
   }
 
   showToast() {

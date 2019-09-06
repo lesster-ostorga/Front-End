@@ -663,6 +663,11 @@ hr{
 /*******************
 Rounds
 *******************/
+.mat-toolbar.mat-primary {
+    background: rgb(252, 91, 91);
+    color: white;
+}
+
 .round{
     line-height:48px;
     color: $white;
