@@ -13,7 +13,7 @@ import { LoginService } from '../../../core/services/login.service'
 
 export class Serviciotraslado {
 
-  readonly url = 'http://localhost:49220/api/catalogos/';
+  readonly url = 'https://umgdemo.azurewebsites.net/api/catalogos/';
   listCatalogoRescate: catalogosRescate;
   // listVoBo : Municipio[];
   // listUnidades : Traslado[];

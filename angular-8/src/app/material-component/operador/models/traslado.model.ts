@@ -8,6 +8,7 @@ export class catalogosRescate //datos generales sin parametros
     vobo:VoBo []
     Departamento: Departamento[]
     TipoAviso: TipoAviso[]
+    ClaseServicio: ClaseServicio[]
 
 }
 
@@ -71,6 +72,20 @@ export class Municipio {
 
     Cod_Lugar: string 
     Lugar: string
+    
+  }
+
+  export class ClaseServicio {
+
+    Cod_Clase_Servicio: string 
+    Des_Clase_Servicio: string
+    
+  }
+
+  export class TipoServicio {
+
+    Cod_Servicio: string 
+    Descripcion_Servicio: string
     
   }
 

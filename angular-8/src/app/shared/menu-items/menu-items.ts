@@ -11,7 +11,7 @@ export interface Menu {
 
 const MENUITEMSOper = [
   { state: 'starter', name: 'Inicio', type: 'link', icon: 'av_timer' },
-  { state: 'operador', type: 'link', name: 'Rescate', icon: 'local_taxi' }
+  { state: 'operador', type: 'link', name: 'Servicios', icon: 'local_taxi' }
 ];
 
 const MENUITEMSServicios = [

@@ -18,6 +18,7 @@ import { LoginService } from '../../../core/services/login.service';
 })
 export class AppSidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+  imgRandom: number;
 
   private _mobileQueryListener: () => void;
 
@@ -30,6 +31,8 @@ export class AppSidebarComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.imgRandom = Math.floor(Math.random() * 4) + 1;
+    //this.imgRandom = "4";
   }
 
   ngOnDestroy(): void {

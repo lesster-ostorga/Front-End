@@ -6,10 +6,19 @@
     <div fxFlex.gt-sm="100%" fxFlex="100">
         <mat-card>
             <mat-card-content>
-                <mat-card-title>Servicio </mat-card-title>
-                <!--<mat-card-subtitle>Check the <code class=""><a href="https://material.angular.io/components/tabs/overview">Official Component</a></code></mat-card-subtitle>-->
-                <mat-card-subtitle>Formulario de servicio</mat-card-subtitle>
-
+                
+                <div class="d-flex justify-content-center">
+                    <img style="width: 150px;" src="assets/images/logo-completo-cvb.png">
+                </div>
+                <mat-card-title class="d-flex justify-content-center">
+                    <strong>BENEMÉRITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA</strong>
+                </mat-card-title>
+                <mat-card-title class="d-flex justify-content-center text-danger"> Formulario de servicio 44ª Compañía Jalapa, Jalapa
+                </mat-card-title>
+                <br>
+                <!--<mat-card-subtitle>Check the <code
+                        class=""><a href="https://material.angular.io/components/tabs/overview">Official Component</a></code>
+                </mat-card-subtitle>-->
                 <div class="d-flex justify-content-center" *ngIf="!service.listCatalogoRescate">
                     <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
                         <span class="sr-only">Loading...</span>
@@ -30,7 +39,7 @@
 
                 <form [formGroup]="Servicio" class="matero-form-horizontal" *ngIf="service.listCatalogoRescate">
                     <div fxLayout="row wrap" fxLayoutGap="8px grid">
-                        <div fxFlex="20" fxFlex.lt-sm="100">
+                        <div fxFlex="10" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Cia.</mat-label>
                                 <mat-select required formControlName="Cod_Compania">
@@ -46,7 +55,7 @@
                         </div>
 
 
-                        <div fxFlex="20" fxFlex.lt-sm="100">
+                        <div fxFlex="10" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>No. Control</mat-label>
                                 <input matInput placeholder="Ingrese el No. Control" type="number" autocomplete="off"
@@ -56,14 +65,34 @@
                             </mat-form-field>
                         </div>
 
-                        <div fxFlex="40" fxFlex.lt-sm="100">
+                        <div fxFlex="30" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Tipo de Servicio.</mat-label>
                                 <mat-select required formControlName="Cod_Servicio">
                                     <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                                    <mat-option value="1">Busqueda y Rescate</mat-option>
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.TipoServicio"
+                                        [value]="item.Cod_Servicio">
+                                        {{item.Descripcion_Servicio}}
+                                    </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_Servicio').invalid">Por favor seleccione el tipo de
+                                    servicio
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="30" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                <mat-label>Clase de Servicio.</mat-label>
+                                <mat-select required formControlName="Cod_Clase_Servicio">
+                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.ClaseServicio"
+                                        [value]="item.Cod_Clase_Servicio">
+                                        {{item.Des_Clase_Servicio}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="Servicio.get('Cod_Clase_Servicio').invalid">Por favor seleccione el
+                                    tipo de
                                     servicio
                                 </mat-error>
                             </mat-form-field>
@@ -536,7 +565,7 @@
                     </p>
                 </form>
                 <br>
-                <pre *ngIf="service.listCatalogoRescate">{{Servicio.value | json}}</pre>
+                <!--<pre *ngIf="service.listCatalogoRescate">{{Servicio.value | json}}</pre>-->
             </mat-card-content>
         </mat-card>
     </div>

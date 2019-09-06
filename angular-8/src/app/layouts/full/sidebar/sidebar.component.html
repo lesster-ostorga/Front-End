@@ -2,7 +2,7 @@
 <!-- sidebar -->
 <!-- ============================================================== -->
 
- <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
+ <div class="user-profile" [ngStyle]="{'background': 'url(assets/images/background/bom' + imgRandom + '.jpg) no-repeat' }">
     <!-- User profile image -->
     <div class="profile-img"> <img [src]="loginService.currentUserValue.url_imagen" [alt]="loginService.currentUserValue.usuario"> </div>
     <!-- User profile text-->

@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 export class OperadorComponent implements OnInit {
 
   time = { hour: 0, minute: 0, second: 0 };
+  OcultaPerAtendida = false;
   seconds = false;
   viewMsg = false;
   msgRes: string;
@@ -49,14 +50,15 @@ export class OperadorComponent implements OnInit {
     ]
   };
 
-  
+
   constructor(private fb: FormBuilder, private calendar: NgbCalendar,
     private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado, private ToastrService: ToastrService) {
     this.service.TrasladoList();
     this.Servicio = this.fb.group({
       NoControl: ['', [Validators.required]],
-      Cod_Compania: ['', [Validators.required]],
+      Cod_Compania: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Cod_Servicio: ['', [Validators.required]],
+      Cod_Clase_Servicio: ['', [Validators.required]],
       Min_Trabajados: ['', [Validators.required]],
       Fecha_Servicio: ['', [Validators.required]],
       Nombre_Solicitante: ['', [Validators.required]],
@@ -67,10 +69,10 @@ export class OperadorComponent implements OnInit {
       Zona: [''],
       Direccion: ['', [Validators.required]],
       Cod_TipoAviso: ['', [Validators.required]],
-      Cod_Compania_Salida: ['', [Validators.required]],
+      Cod_Compania_Salida: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Fecha_Salida: ['', [Validators.required]],
       Hora_Salida: [this.time, [Validators.required]],
-      Cod_Compania_Entrada: ['', [Validators.required]],
+      Cod_Compania_Entrada: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Fecha_Entrada: ['', [Validators.required]],
       Hora_Entrada: [this.time, [Validators.required]],
       Carnet_RadioTelefonista: ['', [Validators.required]],
@@ -137,9 +139,6 @@ export class OperadorComponent implements OnInit {
     control.removeAt(index)
   }
 
-  deletePerAten(control, index) {
-    control.removeAt(index)
-  }
 
   setDataInicial() {
     let controlPer_Aten = <FormArray>this.Servicio.controls.Persona_Atendida;
@@ -242,7 +241,7 @@ export class OperadorComponent implements OnInit {
           this.ToastrService.error(error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.msgRespuesta, "Error en operación", {
             progressBar: true
           });
-          this.msgRes =  error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.codError + ": " + error.error.msgRespuesta;
+          this.msgRes = error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.codError + ": " + error.error.msgRespuesta;
         });
   }
 
