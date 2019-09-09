@@ -29,6 +29,9 @@ export class OperadorComponent implements OnInit {
   msgLoading = 'Guardar Servicio';
   viewSpinner = false;
   data = {
+    
+    
+
     Per_Aten: [
       {
         Nombre: "",
@@ -47,7 +50,10 @@ export class OperadorComponent implements OnInit {
       {
         Carnet: ""
       }
-    ]
+    ],
+
+  
+
   };
 
 
@@ -86,8 +92,10 @@ export class OperadorComponent implements OnInit {
       // Fecha_Imprime: ['', [Validators.required]],
       Persona_Atendida: this.fb.array([]),
       Unidad_Asiste: this.fb.array([]),
-      Persona_Destacada: this.fb.array([])
-    });
+      Persona_Destacada: this.fb.array([]),
+      Inmueble: this.fb.array([]),
+      Vehiculo: this.fb.array([])
+          });
     /*devolvemr un array con los cod_compania de usuario */
     // console.log(this.loginService.currentUserValue.cod_compania)
     this.setDataInicial();
@@ -112,6 +120,33 @@ export class OperadorComponent implements OnInit {
       }))
   }
 
+  addNewInmueble(control) {
+    control.push(
+      this.fb.group({
+        Propietario_Inm: ['', [Validators.required]],
+        Sitio_Inicio: ['', [Validators.required]],
+        Causas: ['', [Validators.required]],
+        Valor_Aproximado_Inm: ['', [Validators.required]],
+        Perdida_Aproximado_Inm: ['', [Validators.required]],
+        Compañia_Aseguradora: ['', [Validators.required]]   
+      }))
+  }
+
+  addNewVehiculo(control) {
+    control.push(
+      this.fb.group({
+        Propietario_Veh: ['', [Validators.required]],
+        Conductor: ['', [Validators.required]],
+        Descripcion: ['', [Validators.required]],
+        Marco: ['', [Validators.required]],
+        Modelo: ['', [Validators.required]],
+        Placas: ['', [Validators.required]],
+        Valor_Aproximado_Vehiculo: ['', [Validators.required]],
+        Perdida_Aproximado_Vehiculo: ['', [Validators.required]],   
+        Compañia_Aseguradora: ['', [Validators.required]]     
+      }))
+  }
+
   addNewUniAsi(control) {
     control.push(
       this.fb.group({
@@ -121,6 +156,14 @@ export class OperadorComponent implements OnInit {
   }
 
   deleteUniAsi(control, index) {
+    control.removeAt(index)
+  }
+
+  deleteInmueble(control, index) {
+    control.removeAt(index)
+  }
+
+  deleteVehiculo(control, index) {
     control.removeAt(index)
   }
 

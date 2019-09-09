@@ -277,6 +277,7 @@
                             <mat-error *ngIf="Servicio.get('Hora_Entrada').invalid">Ingrese hora entrada</mat-error>
                         </div>
 
+                        <!--Sub formulario de personas atendidas-->
                         <div fxFlex.gt-sm="100%" fxFlex="100">
                             <div formArrayName="Persona_Atendida">
                                 <mat-card-title>Personas atendidas</mat-card-title>
@@ -338,6 +339,70 @@
 
                         <div fxFlex.gt-sm="100%" fxFlex="100">
                             <button mat-raised-button color="primary" (click)="addNewPerAte(Servicio.controls.Persona_Atendida)">Agregar Persona</button>
+                        </div>
+
+                        <!--Sub formulario Inmueble-->
+                        <div fxFlex.gt-sm="100%" fxFlex="100">
+                            <div formArrayName="Inmueble">
+                                <mat-card-title>Inmueble</mat-card-title>
+                                <div *ngFor="let project of Servicio.get('Inmueble').controls; let j=index">
+                                    <fieldset>
+                                        <legend>
+                                            <h4>Inmueble No. {{j+1}}</h4>
+                                        </legend>
+                                        <div [formGroupName]="j">
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Propietario</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el propietario" formControlName="Propietario_Inm" required>
+                                                    <mat-error *ngIf="project.get('Propietario_Inm').invalid">Ingrese el nombre del atendido</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="5%" fxFlex.lt-sm="100">
+                                                <button mat-raised-button color="warn" (click)="deleteInmueble(Servicio.controls.Inmueble, j)">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div fxFlex.gt-sm="100%" fxFlex="100">
+                            <button mat-raised-button color="primary" (click)="addNewInmueble(Servicio.controls.Inmueble)">Agregar Inmueble</button>
+                        </div>
+
+                        <!-- Sub Formulario de Vehiculo-->
+                        <div fxFlex.gt-sm="100%" fxFlex="100">
+                            <div formArrayName="Vehiculo">
+                                <mat-card-title>Vehiculo</mat-card-title>
+                                <div *ngFor="let project of Servicio.get('Vehiculo').controls; let j=index">
+                                    <fieldset>
+                                        <legend>
+                                            <h4>Vehiculo No. {{j+1}}</h4>
+                                        </legend>
+                                        <div [formGroupName]="j">
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Propietario</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el Propietario" formControlName="Propietario_Veh" required>
+                                                    <mat-error *ngIf="project.get('Propietario_Veh').invalid">Ingrese el nombre del propietario</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="5%" fxFlex.lt-sm="100">
+                                                <button mat-raised-button color="warn" (click)="deleteVehiculo(Servicio.controls.Vehiculo, j)">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div fxFlex.gt-sm="100%" fxFlex="100">
+                            <button mat-raised-button color="primary" (click)="addNewVehiculo(Servicio.controls.Vehiculo)">Agregar Vehiculo</button>
                         </div>
 
                     </div>
@@ -514,7 +579,7 @@
                     </p>
                 </form>
                 <br>
-                <!--<pre *ngIf="service.listCatalogoRescate">{{Servicio.value | json}}</pre>-->
+                <pre *ngIf="service.listCatalogoRescate">{{Servicio.value | json}}</pre>
             </mat-card-content>
         </mat-card>
     </div>
