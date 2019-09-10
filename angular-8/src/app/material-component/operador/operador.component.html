@@ -358,7 +358,51 @@
                                                     <mat-error *ngIf="project.get('Propietario_Inm').invalid">Ingrese el nombre del atendido</mat-error>
                                                 </mat-form-field>
                                             </div>
-
+                                            <br>
+                                            <br>
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Lugar donde inicio </mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el lugar del incendio" formControlName="Lugar_Inincio_Incendio" required>
+                                                    <mat-error *ngIf="project.get('Lugar_Inincio_Incendio').invalid">Ingrese el lugar donde inicio el incendio</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <!-- prueba de una lista tomando catalogo de rescate a la espera de catalogo de causas -->
+                                            <div fxFlex="20" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Causas</mat-label>
+                                                    <mat-select required formControlName="Cod_Causa" (change)="Cod_Causa($event.target.value)" required>
+                                                        <mat-option>-- Seleccione un elemento de la lista --
+                                                        </mat-option>
+                                                        <mat-option *ngFor="let item of service.listCatalogoRescate.CatTraslado" [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
+                                                            {{item.Descripcion}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                    <mat-error *ngIf="project.get('Cod_Causa').invalid">
+                                                        Seleccione la causa</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Valor aprox. Inmueble</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el lugar del incendio" formControlName="Valor_Aproximado_Inm" required>
+                                                    <mat-error *ngIf="project.get('Valor_Aproximado_Inm').invalid">Ingrese el monto aporximado</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Perdida aprox. Inmueble</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el lugar del incendio" formControlName="Perdida_Aproximado_Inm" required>
+                                                    <mat-error *ngIf="project.get('Perdida_Aproximado_Inm').invalid">Ingrese la perida aporximado</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Compania Aseguradora</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el lugar del incendio" formControlName="Compania_Aseguradora" required>
+                                                    <mat-error *ngIf="project.get('Compania_Aseguradora').invalid">Ingrese la compania aseguradora</mat-error>
+                                                </mat-form-field>
+                                            </div>
                                             <div fxFlex="5%" fxFlex.lt-sm="100">
                                                 <button mat-raised-button color="warn" (click)="deleteInmueble(Servicio.controls.Inmueble, j)">Eliminar</button>
                                             </div>
