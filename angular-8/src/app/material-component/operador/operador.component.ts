@@ -52,7 +52,19 @@ export class OperadorComponent implements OnInit {
       }
     ],
 
+    Inc_Vehiculo: [
+      {
+        Propietario_Veh: ""
+
+      }
+    ],
   
+    Inc_Inmueble: [
+      {
+        Propietario_Inm: ""
+        
+      }
+    ],
 
   };
 
@@ -202,6 +214,21 @@ export class OperadorComponent implements OnInit {
       }))
     })
 
+    let controlInc_Vehiculo = <FormArray>this.Servicio.controls.Vehiculo;
+    this.data.Inc_Vehiculo.forEach(x => {
+      controlInc_Vehiculo.push(this.fb.group({
+        Propietario_Veh: x.Propietario_Veh
+      }))
+    })
+
+    let controlInc_Inmueble = <FormArray>this.Servicio.controls.Inmueble;
+    this.data.Inc_Inmueble.forEach(x => {
+      controlInc_Inmueble.push(this.fb.group({
+        Propietario_Inm: x.Propietario_Inm
+      }))
+    })
+
+  
     let controlPer_Des = <FormArray>this.Servicio.controls.Persona_Destacada;
     this.data.Per_Des.forEach(x => {
       controlPer_Des.push(this.fb.group({
