@@ -54,8 +54,15 @@ export class OperadorComponent implements OnInit {
 
     Inc_Vehiculo: [
       {
-        Propietario_Veh: ""
-
+        Propietario_Veh: "",
+        Conductor: "",
+        Descripcion_Tipo:"",
+        Marca: "",
+        Modelo: "",
+        Placa: "",
+        Valor_Aproximado_Vehiculo:"",
+        Perdida_Aproximado_Vehiculo:"",   
+        Compañia_Aseguradora: ""   
       }
     ],
   
@@ -141,7 +148,7 @@ export class OperadorComponent implements OnInit {
       this.fb.group({
         Propietario_Inm: ['', [Validators.required]],
         Lugar_Inincio_Incendio: ['', [Validators.required]],
-        Cod_Causas: ['', [Validators.required]],
+        Cod_Causa: ['', [Validators.required]],
         Valor_Aproximado_Inm: ['', [Validators.required]],
         Perdida_Aproximado_Inm: ['', [Validators.required]],
         Compania_Aseguradora: ['', [Validators.required]]
@@ -153,10 +160,10 @@ export class OperadorComponent implements OnInit {
       this.fb.group({
         Propietario_Veh: ['', [Validators.required]],
         Conductor: ['', [Validators.required]],
-        Descripcion: ['', [Validators.required]],
-        Marco: ['', [Validators.required]],
+        Descripcion_Tipo: ['', [Validators.required]],
+        Marca: ['', [Validators.required]],
         Modelo: ['', [Validators.required]],
-        Placas: ['', [Validators.required]],
+        Placa: ['', [Validators.required]],
         Valor_Aproximado_Vehiculo: ['', [Validators.required]],
         Perdida_Aproximado_Vehiculo: ['', [Validators.required]],   
         Compañia_Aseguradora: ['', [Validators.required]]     
@@ -221,7 +228,15 @@ export class OperadorComponent implements OnInit {
     let controlInc_Vehiculo = <FormArray>this.Servicio.controls.Vehiculo;
     this.data.Inc_Vehiculo.forEach(x => {
       controlInc_Vehiculo.push(this.fb.group({
-        Propietario_Veh: x.Propietario_Veh
+        Propietario_Veh: x.Propietario_Veh,
+        Conductor: x.Conductor,
+        Descripcion_Tipo: x.Descripcion_Tipo,
+        Marca: x.Marca,
+        Modelo: x.Modelo,
+        Placa: x.Placa,
+        Valor_Aproximado_Vehiculo: x.Valor_Aproximado_Vehiculo,
+        Perdida_Aproximado_Vehiculo: x.Perdida_Aproximado_Vehiculo,   
+        Compañia_Aseguradora: x.Compañia_Aseguradora 
       }))
     })
 

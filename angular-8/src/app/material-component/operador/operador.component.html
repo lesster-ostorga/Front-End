@@ -371,7 +371,7 @@
                                             <div fxFlex="20" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Causas</mat-label>
-                                                    <mat-select required formControlName="Cod_Causa" (change)="Cod_Causa($event.target.value)" required>
+                                                    <mat-select formControlName="Cod_Causa" required>
                                                         <mat-option>-- Seleccione un elemento de la lista --
                                                         </mat-option>
                                                         <mat-option *ngFor="let item of service.listCatalogoRescate.CatTraslado" [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
@@ -382,6 +382,7 @@
                                                         Seleccione la causa</mat-error>
                                                 </mat-form-field>
                                             </div>
+
                                             <div fxFlex="30" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Valor aprox. Inmueble</mat-label>
@@ -389,6 +390,7 @@
                                                     <mat-error *ngIf="project.get('Valor_Aproximado_Inm').invalid">Ingrese el monto aporximado</mat-error>
                                                 </mat-form-field>
                                             </div>
+
                                             <div fxFlex="30" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Perdida aprox. Inmueble</mat-label>
@@ -396,6 +398,7 @@
                                                     <mat-error *ngIf="project.get('Perdida_Aproximado_Inm').invalid">Ingrese la perida aporximado</mat-error>
                                                 </mat-form-field>
                                             </div>
+
                                             <div fxFlex="30" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Compania Aseguradora</mat-label>
@@ -403,6 +406,7 @@
                                                     <mat-error *ngIf="project.get('Compania_Aseguradora').invalid">Ingrese la compania aseguradora</mat-error>
                                                 </mat-form-field>
                                             </div>
+
                                             <div fxFlex="5%" fxFlex.lt-sm="100">
                                                 <button mat-raised-button color="warn" (click)="deleteInmueble(Servicio.controls.Inmueble, j)">Eliminar</button>
                                             </div>
@@ -417,6 +421,7 @@
                             <button mat-raised-button color="primary" (click)="addNewInmueble(Servicio.controls.Inmueble)">Agregar Inmueble</button>
                         </div>
 
+
                         <!-- Sub Formulario de Vehiculo-->
                         <div fxFlex.gt-sm="100%" fxFlex="100">
                             <div formArrayName="Vehiculo">
@@ -427,11 +432,68 @@
                                             <h4>Vehiculo No. {{j+1}}</h4>
                                         </legend>
                                         <div [formGroupName]="j">
+
                                             <div fxFlex="30" fxFlex.lt-sm="100">
                                                 <mat-form-field>
                                                     <mat-label>Propietario</mat-label>
                                                     <input matInput autocomplete="off" placeholder="Ingrese el Propietario" formControlName="Propietario_Veh" required>
                                                     <mat-error *ngIf="project.get('Propietario_Veh').invalid">Ingrese el nombre del propietario</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Descripcion</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese la Descripcion " formControlName="Descripcion_Tipo" required>
+                                                    <mat-error *ngIf="project.get('Descripcion_Tipo').invalid">Ingrese una Descripcion</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Marca</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese la Marca " formControlName="Marca" required>
+                                                    <mat-error *ngIf="project.get('Marca').invalid">Ingrese una Marca</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Modelo</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese el Modelo " formControlName="Modelo" required>
+                                                    <mat-error *ngIf="project.get('Modelo').invalid">Ingrese un Modelo</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Placa</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese una Placa " formControlName="Placa" required>
+                                                    <mat-error *ngIf="project.get('Placa').invalid">Ingrese la placa</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Valor Aproximado</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese valor aporximado " formControlName="Valor_Aproximado_Vehiculo" required>
+                                                    <mat-error *ngIf="project.get('Valor_Aproximado_Vehiculo').invalid">Ingrese el valor aproximado del vehiculo</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Perdida Aproximada</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese perdida aporximada " formControlName="Perdida_Aproximado_Vehiculo" required>
+                                                    <mat-error *ngIf="project.get('Perdida_Aproximado_Vehiculo').invalid">Ingrese la Perdida Aproximado del Vehiculo</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <mat-form-field>
+                                                    <mat-label>Compañia Aseguradora</mat-label>
+                                                    <input matInput autocomplete="off" placeholder="Ingrese perdida aporximada " formControlName="Compañia_Aseguradora" required>
+                                                    <mat-error *ngIf="project.get('Compañia_Aseguradora').invalid">Ingrese la Compañia Aseguradora</mat-error>
                                                 </mat-form-field>
                                             </div>
 
