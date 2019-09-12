@@ -374,7 +374,7 @@
                                                     <mat-select formControlName="Cod_Causa" required>
                                                         <mat-option>-- Seleccione un elemento de la lista --
                                                         </mat-option>
-                                                        <mat-option *ngFor="let item of service.listCatalogoRescate.CatTraslado" [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
+                                                        <mat-option *ngFor="let item of service.listCatalogoRescate.Cat_Causas" [value]="item.Cod_Causa" id="item.Cod_Causa">
                                                             {{item.Descripcion}}
                                                         </mat-option>
                                                     </mat-select>

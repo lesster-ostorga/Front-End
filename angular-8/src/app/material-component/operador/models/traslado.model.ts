@@ -3,6 +3,8 @@ export class catalogosRescate //datos generales sin parametros
     
     CatTraslado: Cat_Traslado[] 
     CatUnidad:Cat_Unidad[] 
+    Cat_Causa:Cat_Causa[]
+    CatVehiculo:Cat_Vehiculo
     Piloto:Piloto[]
     Personal:Personal[] 
     vobo:VoBo []
@@ -24,6 +26,19 @@ export class Cat_Traslado
      Cod_Compania :string 
      Descripcion_TipoUnidad :string
 }
+
+export class Cat_Causa
+{
+    Cod_Causa: string 
+    Descripcion: string 
+ }
+
+ export class Cat_Vehiculo
+ {
+     Cod_Vehiculo: string 
+     Descripcion: string 
+  }
+ 
 
 export class Piloto
 {
