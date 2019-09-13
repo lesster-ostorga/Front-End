@@ -8,6 +8,9 @@ import { first } from 'rxjs/operators';
 import { LoginService } from '../../core/services/login.service';
 import { Serviciotraslado } from '../operador/services/traslado.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../core/Helper/format-datepicker';
+import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './operador.component.html',
   styleUrls: ['./operador.component.scss'],
   // add NgbAlertConfig  to the component providers
-  providers: [NgbAlertConfig]
+  providers: [NgbAlertConfig, { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }]
 })
 export class OperadorComponent implements OnInit {
 
@@ -23,14 +27,16 @@ export class OperadorComponent implements OnInit {
   OcultaPerAtendida = false;
   seconds = false;
   viewMsg = false;
+  viewForm = true;
   msgRes: string;
   alertType = 'success';
   Servicio: FormGroup;
   msgLoading = 'Guardar Servicio';
   viewSpinner = false;
+  today = new Date();
   data = {
-    
-    
+
+
 
     Per_Aten: [
       {
@@ -54,19 +60,19 @@ export class OperadorComponent implements OnInit {
 
     InceVehiculo: [
       {
-        Cod_Vehiculo:"",
+        Cod_Vehiculo: "",
         Propietario_Veh: "",
         Conductor: "",
-        Descripcion_Tipo:"",
+        Descripcion_Tipo: "",
         Marca: "",
         Modelo: "",
         Placa: "",
-        Valor_Aproximado_Vehiculo:"",
-        Perdida_Aproximado_Vehiculo:"",   
-        Compañia_Aseguradora: ""   
+        Valor_Aproximado_Vehiculo: "",
+        Perdida_Aproximado_Vehiculo: "",
+        Compañia_Aseguradora: ""
       }
     ],
-  
+
     InceInmueble: [
       {
         Propietario_Inm: "",
@@ -82,15 +88,15 @@ export class OperadorComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private calendar: NgbCalendar,
-    private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado, private ToastrService: ToastrService) {
+    private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado, private ToastrService: ToastrService, private router: Router,) {
     this.service.TrasladoList();
     this.Servicio = this.fb.group({
       NoControl: ['', [Validators.required]],
       Cod_Compania: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Cod_Servicio: ['', [Validators.required]],
       Cod_Clase_Servicio: ['', [Validators.required]],
-      Min_Trabajados: ['', [Validators.required]],
-      Fecha_Servicio: ['', [Validators.required]],
+      //Min_Trabajados: ['', [Validators.required]],
+      Fecha_Servicio: [new Date(), [Validators.required]],
       Nombre_Solicitante: ['', [Validators.required]],
       Cod_Depto: ['1302', [Validators.required]],
       Cod_Muni: ['', [Validators.required]],
@@ -100,10 +106,10 @@ export class OperadorComponent implements OnInit {
       Direccion: ['', [Validators.required]],
       Cod_TipoAviso: ['', [Validators.required]],
       Cod_Compania_Salida: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
-      Fecha_Salida: ['', [Validators.required]],
+      Fecha_Salida: [new Date(), [Validators.required]],
       Hora_Salida: [this.time, [Validators.required]],
       Cod_Compania_Entrada: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
-      Fecha_Entrada: ['', [Validators.required]],
+      Fecha_Entrada: [new Date(), [Validators.required]],
       Hora_Entrada: [this.time, [Validators.required]],
       Carnet_RadioTelefonista: ['', [Validators.required]],
       Observaciones: ['', [Validators.required]],
@@ -111,7 +117,7 @@ export class OperadorComponent implements OnInit {
       Carnet_FormuladoPor: ['', [Validators.required]],
       Carnet_ConformePiloto: ['', [Validators.required]],
       Carnet_VoBo: ['', [Validators.required]],
-      Fecha_Firma: ['', [Validators.required]],
+      Fecha_Firma: [new Date(), [Validators.required]],
       // Usuario_Registra: [this.loginService.currentUserValue.usuario.toUpperCase(), [Validators.required]],
       // Fecha_Imprime: ['', [Validators.required]],
       Persona_Atendida: this.fb.array([]),
@@ -119,7 +125,7 @@ export class OperadorComponent implements OnInit {
       Persona_Destacada: this.fb.array([]),
       Ince_Inmueble: this.fb.array([]),
       Ince_Vehiculo: this.fb.array([])
-          });
+    });
     /*devolvemr un array con los cod_compania de usuario */
     // console.log(this.loginService.currentUserValue.cod_compania)
     this.setDataInicial();
@@ -133,6 +139,42 @@ export class OperadorComponent implements OnInit {
   // https://ng-bootstrap.github.io/#/components/timepicker/examples
   // https://material.angular.io/components/categories
 
+  selectCodServicio(Cod_Servicio) {
+
+    let controlInc_Vehiculo = <FormArray>this.Servicio.controls.Ince_Vehiculo;
+    while (controlInc_Vehiculo.length !== 0) {
+      controlInc_Vehiculo.removeAt(0)
+    }
+    let controlInc_Inmueble = <FormArray>this.Servicio.controls.Ince_Inmueble;
+    while (controlInc_Inmueble.length !== 0) {
+      controlInc_Inmueble.removeAt(0)
+    }
+
+
+    if (Cod_Servicio == 4) {
+      controlInc_Vehiculo.push(this.fb.group({
+        Cod_Vehiculo: "",
+        Propietario_Veh: "",
+        Conductor: "",
+        Descripcion_Tipo: "",
+        Marca: "",
+        Modelo: "",
+        Placa: "",
+        Valor_Aproximado_Vehiculo: "",
+        Perdida_Aproximado_Vehiculo: "",
+        Compañia_Aseguradora: "",
+      }))
+      controlInc_Inmueble.push(this.fb.group({
+        Propietario_Inm: "",
+        Lugar_Inicio_Incendio: "",
+        Cod_Causa: "",
+        Valor_Aproximado_Inm: "",
+        Perdida_Aproximado_Inm: "",
+        Compania_Aseguradora: "",
+      }))
+
+    }
+  }
 
   addNewPerAte(control) {
     control.push(
@@ -153,7 +195,7 @@ export class OperadorComponent implements OnInit {
         Valor_Aproximado_Inm: ['', [Validators.required]],
         Perdida_Aproximado_Inm: ['', [Validators.required]],
         Compania_Aseguradora: ['', [Validators.required]]
-              }))
+      }))
   }
 
   addNewVehiculo(control) {
@@ -167,8 +209,8 @@ export class OperadorComponent implements OnInit {
         Modelo: ['', [Validators.required]],
         Placa: ['', [Validators.required]],
         Valor_Aproximado_Vehiculo: ['', [Validators.required]],
-        Perdida_Aproximado_Vehiculo: ['', [Validators.required]],   
-        Compañia_Aseguradora: ['', [Validators.required]]     
+        Perdida_Aproximado_Vehiculo: ['', [Validators.required]],
+        Compañia_Aseguradora: ['', [Validators.required]]
       }))
   }
 
@@ -227,6 +269,8 @@ export class OperadorComponent implements OnInit {
       }))
     })
 
+    /*
+    Se comenta codigo, se inicializa al seleccionar servicio incendio
     let controlInc_Vehiculo = <FormArray>this.Servicio.controls.Ince_Vehiculo;
     this.data.InceVehiculo.forEach(x => {
       controlInc_Vehiculo.push(this.fb.group({
@@ -254,8 +298,8 @@ export class OperadorComponent implements OnInit {
         Compania_Aseguradora: x.Compania_Aseguradora
       }))
     })
+  */
 
-  
     let controlPer_Des = <FormArray>this.Servicio.controls.Persona_Destacada;
     this.data.Per_Des.forEach(x => {
       controlPer_Des.push(this.fb.group({
@@ -300,6 +344,10 @@ export class OperadorComponent implements OnInit {
 
   }
 
+  submitNuevo() {
+    //this.router.navigate(['/operadord']);
+    window.location.reload();
+  }
   submit() {
     // this.showToast();
     // Make sure to create a deep copy of the form-model
@@ -328,6 +376,7 @@ export class OperadorComponent implements OnInit {
           this.ToastrService.success(this.msgRes, "Servicio Guardado", {
             progressBar: true
           });
+          this.viewForm = false
         },
         (error: HttpErrorResponse) => {
           this.viewMsg = true;
