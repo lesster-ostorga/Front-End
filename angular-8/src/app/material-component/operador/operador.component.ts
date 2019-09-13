@@ -52,8 +52,9 @@ export class OperadorComponent implements OnInit {
       }
     ],
 
-    Inc_Vehiculo: [
+    InceVehiculo: [
       {
+        Cod_Vehiculo:"",
         Propietario_Veh: "",
         Conductor: "",
         Descripcion_Tipo:"",
@@ -66,10 +67,10 @@ export class OperadorComponent implements OnInit {
       }
     ],
   
-    Inc_Inmueble: [
+    InceInmueble: [
       {
         Propietario_Inm: "",
-        Lugar_Inincio_Incendio: "",
+        Lugar_Inicio_Incendio: "",
         Cod_Causa: "",
         Valor_Aproximado_Inm: "",
         Compania_Aseguradora: "",
@@ -116,8 +117,8 @@ export class OperadorComponent implements OnInit {
       Persona_Atendida: this.fb.array([]),
       Unidad_Asiste: this.fb.array([]),
       Persona_Destacada: this.fb.array([]),
-      Inmueble: this.fb.array([]),
-      Vehiculo: this.fb.array([])
+      Ince_Inmueble: this.fb.array([]),
+      Ince_Vehiculo: this.fb.array([])
           });
     /*devolvemr un array con los cod_compania de usuario */
     // console.log(this.loginService.currentUserValue.cod_compania)
@@ -147,7 +148,7 @@ export class OperadorComponent implements OnInit {
     control.push(
       this.fb.group({
         Propietario_Inm: ['', [Validators.required]],
-        Lugar_Inincio_Incendio: ['', [Validators.required]],
+        Lugar_Inicio_Incendio: ['', [Validators.required]],
         Cod_Causa: ['', [Validators.required]],
         Valor_Aproximado_Inm: ['', [Validators.required]],
         Perdida_Aproximado_Inm: ['', [Validators.required]],
@@ -158,6 +159,7 @@ export class OperadorComponent implements OnInit {
   addNewVehiculo(control) {
     control.push(
       this.fb.group({
+        Cod_Vehiculo: ['', [Validators.required]],
         Propietario_Veh: ['', [Validators.required]],
         Conductor: ['', [Validators.required]],
         Descripcion_Tipo: ['', [Validators.required]],
@@ -225,9 +227,10 @@ export class OperadorComponent implements OnInit {
       }))
     })
 
-    let controlInc_Vehiculo = <FormArray>this.Servicio.controls.Vehiculo;
-    this.data.Inc_Vehiculo.forEach(x => {
+    let controlInc_Vehiculo = <FormArray>this.Servicio.controls.Ince_Vehiculo;
+    this.data.InceVehiculo.forEach(x => {
       controlInc_Vehiculo.push(this.fb.group({
+        Cod_Vehiculo: x.Cod_Vehiculo,
         Propietario_Veh: x.Propietario_Veh,
         Conductor: x.Conductor,
         Descripcion_Tipo: x.Descripcion_Tipo,
@@ -240,11 +243,11 @@ export class OperadorComponent implements OnInit {
       }))
     })
 
-    let controlInc_Inmueble = <FormArray>this.Servicio.controls.Inmueble;
-    this.data.Inc_Inmueble.forEach(x => {
+    let controlInc_Inmueble = <FormArray>this.Servicio.controls.Ince_Inmueble;
+    this.data.InceInmueble.forEach(x => {
       controlInc_Inmueble.push(this.fb.group({
         Propietario_Inm: x.Propietario_Inm,
-        Lugar_Inincio_Incendio: x.Lugar_Inincio_Incendio,
+        Lugar_Inicio_Incendio: x.Lugar_Inicio_Incendio,
         Cod_Causa: x.Cod_Causa,
         Valor_Aproximado_Inm: x.Valor_Aproximado_Inm,
         Perdida_Aproximado_Inm: x.Perdida_Aproximado_Inm,
