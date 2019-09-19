@@ -447,7 +447,7 @@
                                                 <div fxFlex="30" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Valor aprox. Inmueble</mat-label>
-                                                        <input matInput autocomplete="off"
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01"
                                                             placeholder="Ingrese el lugar del incendio"
                                                             formControlName="Valor_Aproximado_Inm" required>
                                                         <mat-error *ngIf="project.get('Valor_Aproximado_Inm').invalid">
@@ -458,7 +458,7 @@
                                                 <div fxFlex="30" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Perdida aprox. Inmueble</mat-label>
-                                                        <input matInput autocomplete="off"
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01"
                                                             placeholder="Ingrese el lugar del incendio"
                                                             formControlName="Perdida_Aproximado_Inm" required>
                                                         <mat-error
@@ -600,7 +600,7 @@
                                                 <div fxFlex="10" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Valor Aproximado</mat-label>
-                                                        <input matInput autocomplete="off"
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01"
                                                             placeholder="Ingrese valor aporximado "
                                                             formControlName="Valor_Aproximado_Vehiculo" required>
                                                         <mat-error
@@ -612,7 +612,7 @@
                                                 <div fxFlex="10" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Perdida Aproximada</mat-label>
-                                                        <input matInput autocomplete="off"
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01"
                                                             placeholder="Ingrese perdida aporximada "
                                                             formControlName="Perdida_Aproximado_Vehiculo" required>
                                                         <mat-error
