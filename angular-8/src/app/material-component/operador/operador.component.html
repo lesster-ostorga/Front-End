@@ -194,11 +194,10 @@
 
                         <div fxFlex="60" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <mat-label>Nombre solicitante</mat-label>
-                                <input matInput placeholder="Ingrese el nombre del solicitante" autocomplete="off"
+                                <mat-label>Nombre del ó (los) solicitantes (s)</mat-label>
+                                <input matInput placeholder="Nombre del ó (los) solicitantes (s)" autocomplete="off"
                                     formControlName="Nombre_Solicitante" required>
-                                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese el nombre del
-                                    solicitante
+                                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese nombre del ó (los) solicitantes (s)
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -311,7 +310,7 @@
                                         </legend>
                                         <div [formGroupName]="j">
                                             <div fxLayout="row wrap" fxLayoutGap="8px grid">
-                                                <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <div fxFlex="25" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Nombre</mat-label>
                                                         <input matInput autocomplete="off"
@@ -331,7 +330,7 @@
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
-                                                <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <div fxFlex="20" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Domicilio.</mat-label>
                                                         <input matInput placeholder="Ingrese el domicilio"
@@ -341,22 +340,38 @@
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
-
-                                                <div fxFlex="30" fxFlex.lt-sm="100">
+                                                <div fxFlex="7" fxFlex.lt-sm="100">
                                                     <mat-form-field>
-                                                        <mat-label>Traslado</mat-label>
-                                                        <mat-select required formControlName="Cod_Ubi_Traslado"
-                                                            (change)="Cod_Compania($event.target.value)" required>
+                                                        <mat-label>Fallecido</mat-label>
+                                                        <mat-select required formControlName="Fallecido" required>
                                                             <mat-option>-- Seleccione un elemento de la lista --
                                                             </mat-option>
-                                                            <mat-option
-                                                                *ngFor="let item of service.listCatalogoRescate.CatTraslado"
+                                                            <mat-option value="S">SI</mat-option>
+                                                            <mat-option value="N">NO</mat-option>
+                                                        </mat-select>
+                                                        <mat-error *ngIf="project.get('Fallecido').invalid">Seleccione el área
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="18" fxFlex.lt-sm="100">
+                                                    <mat-form-field>
+                                                        <mat-label>Acompañante</mat-label>
+                                                        <input matInput autocomplete="off"
+                                                            placeholder="Ingrese el nombre del acompañante"
+                                                            formControlName="Acompanante">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="20" fxFlex.lt-sm="100">
+                                                    <mat-form-field>
+                                                        <mat-label>Traslado</mat-label>
+                                                        <mat-select required formControlName="Cod_Ubi_Traslado" required>
+                                                            <mat-option>-- Seleccione un elemento de la lista -- </mat-option>
+                                                            <mat-option *ngFor="let item of service.listCatalogoRescate.CatTraslado"
                                                                 [value]="item.Ubi_Traslado" id="item.Ubi_Traslado">
                                                                 {{item.Descripcion}}
                                                             </mat-option>
                                                         </mat-select>
-                                                        <mat-error *ngIf="project.get('Cod_Ubi_Traslado').invalid">
-                                                            Seleccione la compañía</mat-error>
+                                                        <mat-error *ngIf="project.get('Cod_Ubi_Traslado').invalid"> Seleccione la compañía</mat-error>
                                                     </mat-form-field>
                                                 </div>
                                                 <div fxFlex="5" fxFlex.lt-sm="100">

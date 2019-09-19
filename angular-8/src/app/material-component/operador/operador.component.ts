@@ -43,6 +43,8 @@ export class OperadorComponent implements OnInit {
         Nombre: "",
         Edad: "",
         Domicilio: "",
+        Fallecido: "",
+        Acompanante: "",
         Cod_Ubi_Traslado: ""
       }
     ],
@@ -182,6 +184,8 @@ export class OperadorComponent implements OnInit {
         Nombre: ['', [Validators.required]],
         Edad: ['', [Validators.required]],
         Domicilio: ['', [Validators.required]],
+        Fallecido: ['', [Validators.required]],
+        Acompanante: [''],
         Cod_Ubi_Traslado: ['', [Validators.required]]
       }))
   }
@@ -257,6 +261,8 @@ export class OperadorComponent implements OnInit {
         Nombre: x.Nombre,
         Edad: x.Edad,
         Domicilio: x.Domicilio,
+        Fallecido: x.Fallecido,
+        Acompanante: x.Acompanante,
         Cod_Ubi_Traslado: x.Cod_Ubi_Traslado
       }))
     })
