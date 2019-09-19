@@ -16,7 +16,7 @@ export class ServicioPerfil {
 
   public tokenKey: string = 'usuario';
 
-  readonly url = 'http://umgdemo.azurewebsites.net/api/usuarios/';
+  readonly url = 'https://umgdemo.azurewebsites.net/api/usuarios/';
   perfil: Perfil;
  
 
