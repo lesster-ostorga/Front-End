@@ -192,7 +192,7 @@
                             </mat-form-field>
                         </div>
 
-                        <div fxFlex="60" fxFlex.lt-sm="100">
+                        <div [fxFlex]="(Servicio.controls.Cod_TipoAviso.value == 1) ? 50 : 60" fxFlex.lt-sm="100">
                             <mat-form-field>
                                 <mat-label>Nombre del ó (los) solicitantes (s)</mat-label>
                                 <input matInput placeholder="Nombre del ó (los) solicitantes (s)" autocomplete="off"
@@ -214,6 +214,16 @@
                                     </mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="Servicio.get('Cod_TipoAviso').invalid">Seleccione el tipo de aviso
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="10" fxFlex.lt-sm="100" *ngIf="Servicio.controls.Cod_TipoAviso.value == 1">
+                            <mat-form-field>
+                                <mat-label>Teléfono.</mat-label>
+                                <input matInput placeholder="Teléfono" type="number" autocomplete="off"
+                                    formControlName="NoTelefono">
+                                <mat-error *ngIf="Servicio.get('NoTelefono').invalid">Teléfono incorrecto
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -844,6 +854,7 @@
                             aria-hidden="true"></span>
                         Crear Nuevo Servicio
                     </button>
+                    <br>
                 <p *ngIf="viewMsg == true">
                         <ngb-alert [type]="alertType" [dismissible]="false">
                             <strong>Notificación!</strong> {{msgRes}}.

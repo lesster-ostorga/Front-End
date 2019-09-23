@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, MaxLengthValidator } from '@angular/forms';
 import { NgbDateStruct, NgbCalendar, NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RescateService } from '../../core/services/rescate.service.';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -107,6 +107,8 @@ export class OperadorComponent implements OnInit {
       Zona: [''],
       Direccion: ['', [Validators.required]],
       Cod_TipoAviso: ['', [Validators.required]],
+      //NoTelefono: ['', Validators.compose([Validators.min(10000000), Validators.max(99999999)])],
+      NoTelefono: [''],
       Cod_Compania_Salida: [loginService.currentUserValue.cod_compania[0], [Validators.required]],
       Fecha_Salida: [new Date(), [Validators.required]],
       Hora_Salida: [this.time, [Validators.required]],
@@ -316,6 +318,15 @@ export class OperadorComponent implements OnInit {
 
   ngOnInit() {
 
+    /*Verificar para haer obligatorio el telefono*/
+    this.Servicio.controls.Cod_TipoAviso.valueChanges.subscribe(cmbChange => {
+      if (cmbChange == 1) {
+        this.Servicio.controls.NoTelefono.setValidators(Validators.compose([Validators.required, Validators.min(10000000), Validators.max(99999999)]));
+      } else {
+        this.Servicio.controls.NoTelefono.setValidators(null);
+      }
+      this.Servicio.controls.NoTelefono.updateValueAndValidity();
+    });
   }
 
   getmunicipio(cod_depto: string) {
