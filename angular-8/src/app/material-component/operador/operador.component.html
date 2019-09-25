@@ -232,7 +232,7 @@
                             <mat-form-field>
                                 <mat-label>Radio/Telefonista</mat-label>
                                 <mat-select required formControlName="Carnet_RadioTelefonista">
-                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Personal"
+                                    <mat-option *ngFor="let item of service.listCatalogoRescate.Personal_RadioTel"
                                         [value]="item.Carnet">
                                         {{item.Nombre}}
                                     </mat-option>

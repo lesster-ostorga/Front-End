@@ -6,6 +6,7 @@ export class catalogosRescate //datos generales sin parametros
     Cat_Causa:Cat_Causa[]
     CatVehiculo:Cat_Vehiculo
     Piloto:Piloto[]
+    Personal_RadioTel:Personal_RadioTel[]
     Personal:Personal[] 
     vobo:VoBo []
     Departamento: Departamento[]
@@ -41,6 +42,13 @@ export class Cat_Causa
  
 
 export class Piloto
+{
+    Carnet : string 
+    Nombre: string  
+    cargo : string 
+}
+
+export class Personal_RadioTel
 {
     Carnet : string 
     Nombre: string  
