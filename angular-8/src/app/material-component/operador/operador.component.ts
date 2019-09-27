@@ -90,7 +90,7 @@ export class OperadorComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private calendar: NgbCalendar,
-    private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado, private ToastrService: ToastrService, private router: Router,) {
+    private rescateService: RescateService, private loginService: LoginService, private service: Serviciotraslado, private ToastrService: ToastrService, private router: Router, ) {
     this.service.TrasladoList();
     this.Servicio = this.fb.group({
       NoControl: ['', [Validators.required]],
@@ -365,6 +365,38 @@ export class OperadorComponent implements OnInit {
     //this.router.navigate(['/operadord']);
     window.location.reload();
   }
+
+  submitImpresion() {
+    //this.router.navigate(['/operadord']);
+    this.rescateService.ImpresionServicio()
+      .pipe(first())
+      .subscribe(
+        data => {
+          console.log(data);
+          this.downLoadFile(data, "application/pdf")
+          this.ToastrService.success(this.msgRes, "Descarga de archivo", {
+            progressBar: true
+          });
+          this.viewForm = false
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this.ToastrService.error(error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.msgRespuesta, "Error en operación", {
+            progressBar: true
+          });
+          this.msgRes = error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.codError + ": " + error.error.msgRespuesta;
+        });
+  }
+
+  downLoadFile(data: any, type: string) {
+    let blob = new Blob([data], { type: type });
+    let url = window.URL.createObjectURL(blob);
+    let pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+      alert('Please disable your Pop-up blocker and try again.');
+    }
+  }
+
   submit() {
     // this.showToast();
     // Make sure to create a deep copy of the form-model
