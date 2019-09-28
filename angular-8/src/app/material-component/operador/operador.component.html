@@ -759,7 +759,12 @@
                         <span *ngIf="viewSpinner" class="spinner-border spinner-border-sm" role="status"
                             aria-hidden="true"></span>
                         Crear Nuevo Servicio
-                    </button>
+                </button>
+                <button mat-raised-button color="accent" (click)="submitImpresion()" *ngIf="viewForm == false">
+                    <span *ngIf="viewSpinner" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    Impresión
+                </button>
                 <br>
                 <p *ngIf="viewMsg == true">
                     <ngb-alert [type]="alertType" [dismissible]="false">

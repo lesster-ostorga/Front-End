@@ -43,4 +43,16 @@ export class RescateService {
         return msgRes;
       }));
   }
+
+  ImpresionServicio() {
+    return this.http.get<any>("https://umgdemo.azurewebsites.net/api/FileServicio?Cod_Compania=44&NoControl=201935", this.httpOptions)
+      .pipe(map(msgRes => {
+        // login successful if there's a jwt token in the response
+        if (msgRes && msgRes.codError == 0) {
+          console.log(msgRes);
+          this.currentResponseMsgSubject.next(msgRes);
+        }
+        return msgRes;
+      }));
+  }
 }
