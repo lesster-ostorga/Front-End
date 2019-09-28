@@ -182,9 +182,9 @@
 
                         <div [fxFlex]="(Servicio.controls.Cod_TipoAviso.value == 1) ? 50 : 60" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <mat-label>Nombre del ó (los) solicitante (s)</mat-label>
-                                <input matInput placeholder="Nombre del ó (los) solicitante(s)" autocomplete="off" formControlName="Nombre_Solicitante" required>
-                                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese el nombre del ó (los) solicitante(s)
+                                <mat-label>Nombre del o (los) solicitante (s)</mat-label>
+                                <input matInput placeholder="Nombre del o (los) solicitante(s)" autocomplete="off" formControlName="Nombre_Solicitante" required>
+                                <mat-error *ngIf="Servicio.get('Nombre_Solicitante').invalid">Ingrese el nombre del o (los) solicitante(s)
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -328,8 +328,8 @@
                                                         <mat-select required formControlName="Fallecido" required>
                                                             <mat-option>-- Seleccione un elemento de la lista --
                                                             </mat-option>
-                                                            <mat-option value="S">SI</mat-option>
-                                                            <mat-option value="N">NO</mat-option>
+                                                            <mat-option value="S">Si</mat-option>
+                                                            <mat-option value="N">No</mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="project.get('Fallecido').invalid">Seleccione una opción
                                                         </mat-error>
@@ -418,7 +418,7 @@
                                                 <div fxFlex="30" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Valor aprox. Inmueble</mat-label>
-                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese el lugar del incendio" formControlName="Valor_Aproximado_Inm" required>
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese el monto aporximado" formControlName="Valor_Aproximado_Inm" required>
                                                         <mat-error *ngIf="project.get('Valor_Aproximado_Inm').invalid">
                                                             Ingrese el monto aporximado</mat-error>
                                                     </mat-form-field>
@@ -427,7 +427,7 @@
                                                 <div fxFlex="30" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Perdida aprox. Inmueble</mat-label>
-                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese el lugar del incendio" formControlName="Perdida_Aproximado_Inm" required>
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese la perdida aproximada" formControlName="Perdida_Aproximado_Inm" required>
                                                         <mat-error *ngIf="project.get('Perdida_Aproximado_Inm').invalid">
                                                             Ingrese la perdida aproximada</mat-error>
                                                     </mat-form-field>
@@ -435,8 +435,8 @@
 
                                                 <div fxFlex="40" fxFlex.lt-sm="100">
                                                     <mat-form-field>
-                                                        <mat-label>Compania Aseguradora</mat-label>
-                                                        <input matInput autocomplete="off" placeholder="Ingrese el lugar del incendio" formControlName="Compania_Aseguradora" required>
+                                                        <mat-label>Compañia Aseguradora</mat-label>
+                                                        <input matInput autocomplete="off" placeholder="Ingrese la compañia aseguradora" formControlName="Compania_Aseguradora" required>
                                                         <mat-error *ngIf="project.get('Compania_Aseguradora').invalid">
                                                             Ingrese la compañia aseguradora</mat-error>
                                                     </mat-form-field>
@@ -500,7 +500,7 @@
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="project.get('Cod_Vehiculo').invalid">
-                                                            Seleccione la causa</mat-error>
+                                                            Seleccione el tipo de vehículo</mat-error>
                                                     </mat-form-field>
                                                 </div>
 
@@ -516,7 +516,7 @@
                                                 <div fxFlex="30" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Descripcion del Vehiculo</mat-label>
-                                                        <input matInput autocomplete="off" placeholder="Ingrese valor aporximado " formControlName="Descripcion_Tipo" required>
+                                                        <input matInput autocomplete="off" placeholder="Ingrese descripción del vehículo" formControlName="Descripcion_Tipo" required>
                                                         <mat-error *ngIf="project.get('Descripcion_Tipo').invalid">
                                                             Ingrese descripción del vehículo</mat-error>
                                                     </mat-form-field>
@@ -543,18 +543,18 @@
                                                 <div fxFlex="10" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Valor Aproximado</mat-label>
-                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese valor aporximado " formControlName="Valor_Aproximado_Vehiculo" required>
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese el valor aproximado del vehículo" formControlName="Valor_Aproximado_Vehiculo" required>
                                                         <mat-error *ngIf="project.get('Valor_Aproximado_Vehiculo').invalid">
-                                                            Ingrese el valor aproximado del vehiculo</mat-error>
+                                                            Ingrese el valor aproximado del vehículo</mat-error>
                                                     </mat-form-field>
                                                 </div>
 
                                                 <div fxFlex="10" fxFlex.lt-sm="100">
                                                     <mat-form-field>
                                                         <mat-label>Perdida Aproximada</mat-label>
-                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese perdida aporximada " formControlName="Perdida_Aproximado_Vehiculo" required>
+                                                        <input matInput type="number" autocomplete="off" min="0" step="0.01" placeholder="Ingrese la Perdida Aproximada del vehículo" formControlName="Perdida_Aproximado_Vehiculo" required>
                                                         <mat-error *ngIf="project.get('Perdida_Aproximado_Vehiculo').invalid">
-                                                            Ingrese la Perdida Aproximada del Vehiculo</mat-error>
+                                                            Ingrese la Perdida Aproximada del vehículo</mat-error>
                                                     </mat-form-field>
                                                 </div>
 
@@ -646,7 +646,7 @@
                         </div>
                         <div fxFlex.gt-sm="40" fxFlex="100">
                             <div formArrayName="Persona_Destacada">
-                                <mat-card-title>Personal destacado</mat-card-title>
+                                <mat-card-title>Personal Destacado</mat-card-title>
                                 <div *ngFor="let project of Servicio.get('Persona_Destacada').controls; let j=index">
                                     <fieldset>
                                         <legend>
@@ -723,7 +723,7 @@
 
                         <div fxFlex="25" fxFlex.lt-sm="100">
                             <mat-form-field>
-                                <mat-label>Vo. Bo.</mat-label>
+                                <mat-label>Vo.Bo.</mat-label>
                                 <mat-select required formControlName="Carnet_VoBo">
                                     <mat-option *ngFor="let item of service.listCatalogoRescate.vobo" [value]="item.Carnet">
                                         {{item.Nombre}}
