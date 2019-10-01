@@ -380,7 +380,7 @@ export class OperadorComponent implements OnInit {
           this.msgLoadingImp = "Impresión Servicio"
           const linkSource = 'data:application/pdf;base64,' + data.msgRespuesta;
           const downloadLink = document.createElement("a");
-          const fileName = this.Servicio.controls.cod_compania.value + "_" + this.Servicio.controls.NoControl.value + ".pdf";
+          const fileName = this.Servicio.controls.Cod_Compania.value + "_" + this.Servicio.controls.NoControl.value + ".pdf";
           downloadLink.href = linkSource;
           downloadLink.download = fileName;
           downloadLink.click();
@@ -421,7 +421,7 @@ export class OperadorComponent implements OnInit {
           //Se coloca no control real con el numero devuleto por la API
           let NoControl = <FormControl>this.Servicio.controls.NoControl;
           NoControl.setValue(data.msgRespuesta);
-          this.msgRes = ' El servicio fue guardado correctamente con el número:' + data.msgRespuesta;
+          this.msgRes = ' El servicio fue guardado correctamente con el número: ' + data.msgRespuesta;
           //this.Servicio.reset();
           this.ToastrService.success(this.msgRes, "Servicio Guardado", {
             progressBar: true
