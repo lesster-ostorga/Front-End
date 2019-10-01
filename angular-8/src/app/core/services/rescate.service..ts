@@ -56,4 +56,16 @@ export class RescateService {
         return msgRes;
       }));
   }
+
+  ImpresionRptEstaMensual(rptForm: FormGroup) {
+    return this.http.post<any>(this.baseurl + 'rptEstadisticoMesual', rptForm, this.httpOptions)
+      .pipe(map(msgRes => {
+        // login successful if there's a jwt token in the response
+        if (msgRes && msgRes.codError == 0) {
+          //console.log(msgRes);
+          this.currentResponseMsgSubject.next(msgRes);
+        }
+        return msgRes;
+      }));
+  }
 }
