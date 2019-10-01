@@ -32,7 +32,9 @@ export class OperadorComponent implements OnInit {
   alertType = 'success';
   Servicio: FormGroup;
   msgLoading = 'Guardar Servicio';
+  msgLoadingImp = 'Impresión Servicio';
   viewSpinner = false;
+  viewSpinnerImp = false;
   today = new Date();
   data = {
 
@@ -366,35 +368,31 @@ export class OperadorComponent implements OnInit {
     window.location.reload();
   }
 
+
   submitImpresion() {
-    //this.router.navigate(['/operadord']);
-    this.rescateService.ImpresionServicio()
+    this.viewSpinnerImp = true;
+    this.msgLoadingImp = "Descargando..."
+    this.rescateService.ImpresionServicio(this.Servicio.value)
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
-          this.downLoadFile(data, "application/pdf")
-          this.ToastrService.success(this.msgRes, "Descarga de archivo", {
-            progressBar: true
-          });
-          this.viewForm = false
+          this.viewSpinnerImp = false;
+          this.msgLoadingImp = "Impresión Servicio"
+          const linkSource = 'data:application/pdf;base64,' + data.msgRespuesta;
+          const downloadLink = document.createElement("a");
+          const fileName = this.Servicio.controls.cod_compania.value + "_" + this.Servicio.controls.NoControl.value + ".pdf";
+          downloadLink.href = linkSource;
+          downloadLink.download = fileName;
+          downloadLink.click();
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
+          this.viewSpinnerImp = false;
+          this.msgLoadingImp = "Impresión Servicio"
           this.ToastrService.error(error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.msgRespuesta, "Error en operación", {
             progressBar: true
           });
           this.msgRes = error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.codError + ": " + error.error.msgRespuesta;
         });
-  }
-
-  downLoadFile(data: any, type: string) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
-    let pwa = window.open(url);
-    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
-      alert('Please disable your Pop-up blocker and try again.');
-    }
   }
 
   submit() {
@@ -420,8 +418,11 @@ export class OperadorComponent implements OnInit {
           this.alertType = "success";
           this.viewSpinner = false;
           this.msgLoading = "Guardar Servicio";
-          this.msgRes = data.msgRespuesta;
-          this.Servicio.reset();
+          //Se coloca no control real con el numero devuleto por la API
+          let NoControl = <FormControl>this.Servicio.controls.NoControl;
+          NoControl.setValue(data.msgRespuesta);
+          this.msgRes = ' El servicio fue guardado correctamente con el número:' + data.msgRespuesta;
+          //this.Servicio.reset();
           this.ToastrService.success(this.msgRes, "Servicio Guardado", {
             progressBar: true
           });
