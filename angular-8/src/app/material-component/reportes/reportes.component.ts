@@ -74,6 +74,7 @@ export class ReportesComponent {
     });
   }
 
+
   submitrptEstaMensual() {
 
     // stop here if form is invalid
@@ -81,6 +82,12 @@ export class ReportesComponent {
       this.viewMsg = false;
       return;
     }
+
+
+   
+
+
+
 
     this.msgrptEstaMensual = 'Descargando...';
     this.viewSpinnerImp = true;

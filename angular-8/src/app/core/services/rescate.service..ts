@@ -12,8 +12,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class RescateService {
   
-  baseurl: string = 'https://umgdemo.azurewebsites.net/api/Rescate';
-  baseurl2:string = 'https://umgdemo.azurewebsites.net/api/Servicio'; 
+  //baseurl: string = 'http://localhost:49220/api/';
+  baseurl: string = 'https://umgdemo.azurewebsites.net/api/';
+  baseurl2:string = 'https://umgdemo.azurewebsites.net/api/Servicio';
   private currentResponseMsgSubject: BehaviorSubject<ResponseMsg>;
   public currentResponseMsg: Observable<ResponseMsg>;
 
@@ -34,17 +35,16 @@ export class RescateService {
   }
 
   RescateSave(Servicio: FormGroup) {
-    return this.http.post<any>(this.baseurl, Servicio, this.httpOptions)
+    return this.http.post<any>(this.baseurl + 'Rescate', Servicio, this.httpOptions)
       .pipe(map(msgRes => {
         // login successful if there's a jwt token in the response
         if (msgRes && msgRes.codError == 0) {
-          console.log(msgRes);
+          //console.log(msgRes);
           this.currentResponseMsgSubject.next(msgRes);
         }
         return msgRes;
       }));
   }
-
 
   edicionForm(Servicio: FormGroup) {
     return this.http.post<any>(this.baseurl2, Servicio, this.httpOptions)
@@ -58,13 +58,24 @@ export class RescateService {
       }));
   }
 
-
-  ImpresionServicio() {
-    return this.http.get<any>("https://umgdemo.azurewebsites.net/api/FileServicio?Cod_Compania=44&NoControl=201935", this.httpOptions)
+  ImpresionServicio(Servicio: FormGroup) {
+    return this.http.post<any>(this.baseurl + 'pdfServicio', Servicio, this.httpOptions)
       .pipe(map(msgRes => {
         // login successful if there's a jwt token in the response
         if (msgRes && msgRes.codError == 0) {
-          console.log(msgRes);
+          //console.log(msgRes);
+          this.currentResponseMsgSubject.next(msgRes);
+        }
+        return msgRes;
+      }));
+  }
+
+  ImpresionRptEstaMensual(rptForm: FormGroup) {
+    return this.http.post<any>(this.baseurl + 'rptEstadisticoMesual', rptForm, this.httpOptions)
+      .pipe(map(msgRes => {
+        // login successful if there's a jwt token in the response
+        if (msgRes && msgRes.codError == 0) {
+          //console.log(msgRes);
           this.currentResponseMsgSubject.next(msgRes);
         }
         return msgRes;

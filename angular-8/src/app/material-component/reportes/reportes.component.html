@@ -2,94 +2,92 @@
 <!-- Fixed height Card Grid-->
 <!-- ============================================================== -->
 <div fxLayout="row" *ngIf="false">
-  <div fxFlex.gt-sm="100%">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-title>Basic list</mat-card-title>
-        <mat-card-subtitle><code>&lt;mat-list&gt;</code> is a container component that wraps and formats a series of
-          line items. As the base list component, it provides Material Design styling, but no behavior of its
-          own.<code><a href="https://material.angular.io/components/list/overview">Official Doc here</a></code>
-        </mat-card-subtitle>
-        <mat-list role="list">
-          <mat-list-item role="listitem">Item 1</mat-list-item>
-          <mat-list-item role="listitem">Item 2</mat-list-item>
-          <mat-list-item role="listitem">Item 3</mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Basic list</mat-card-title>
+                <mat-card-subtitle><code>&lt;mat-list&gt;</code> is a container component that wraps and formats a series of line items. As the base list component, it provides Material Design styling, but no behavior of its own.
+                    <code><a href="https://material.angular.io/components/list/overview">Official Doc here</a></code>
+                </mat-card-subtitle>
+                <mat-list role="list">
+                    <mat-list-item role="listitem">Item 1</mat-list-item>
+                    <mat-list-item role="listitem">Item 2</mat-list-item>
+                    <mat-list-item role="listitem">Item 3</mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
 <!-- ============================================================== -->
 <!-- List with selection-->
 <!-- ============================================================== -->
 <div fxLayout="row">
-  <div fxFlex.gt-sm="50%">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-title>Control Mensual Estadístico</mat-card-title>
-        <mat-card-subtitle>Seleccione el año y mes para poder descargar el reporte</mat-card-subtitle>
-        <form [formGroup]="rptEstaMensual" class="matero-form-horizontal">
-          <div fxLayout="row wrap" fxLayoutGap="8px grid">
-              <div fxFlex="100" fxFlex.lt-sm="100">
-                  <mat-form-field>
-                      <mat-label>Cia.</mat-label>
-                      <mat-select required formControlName="Cod_Compania">
-                          <mat-option>-- Seleccione un elemento de la lista --</mat-option>
-                          <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania"
-                              [value]="item">
-                              {{item}}
-                          </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="rptEstaMensual.get('Cod_Compania').invalid">Seleccione la compañía
-                      </mat-error>
-                  </mat-form-field>
-              </div>
-            <div fxFlex="100" fxFlex.lt-sm="100">
-              <mat-form-field>
-                <mat-label>Año</mat-label>
-                <mat-select required formControlName="Anio">
-                  <mat-option>-- Seleccione un elemento de la lista --
-                  </mat-option>
-                  <mat-option value="2019">2019</mat-option>
-                </mat-select>
-                <mat-error *ngIf="rptEstaMensual.get('Anio').invalid">Seleccione el año
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100" fxFlex.lt-sm="100">
-              <mat-form-field>
-                <mat-label>Mes</mat-label>
-                <mat-select required formControlName="Mes">
-                  <mat-option>-- Seleccione un elemento de la lista --
-                  </mat-option>
-                  <mat-option value="1">Enero</mat-option>
-                  <mat-option value="2">Febrero</mat-option>
-                  <mat-option value="3">Marzo</mat-option>
-                  <mat-option value="4">Abril</mat-option>
-                  <mat-option value="5">Mayo</mat-option>
-                  <mat-option value="6">Junio</mat-option>
-                  <mat-option value="7">Julio</mat-option>
-                  <mat-option value="8">Agosto</mat-option>
-                  <mat-option value="9">Septiembre</mat-option>
-                  <mat-option value="10">Octubre</mat-option>
-                  <mat-option value="11">Noviembre</mat-option>
-                  <mat-option value="12">Diciembre</mat-option>
-                </mat-select>
-                <mat-error *ngIf="rptEstaMensual.get('Mes').invalid">Seleccione el mes
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div fxFlex="100%" fxFlex.lt-sm="100">
-                <button mat-raised-button color="warn" (click)="submitrptEstaMensual()">
+    <div fxFlex.gt-sm="50%">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Control Mensual Estadístico</mat-card-title>
+                <mat-card-subtitle>Seleccione el año y mes para poder descargar el reporte</mat-card-subtitle>
+                <form [formGroup]="rptEstaMensual" class="matero-form-horizontal">
+                    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                        <div fxFlex="100" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                <mat-label>Cia.</mat-label>
+                                <mat-select required formControlName="Cod_Compania">
+                                    <mat-option>-- Seleccione un elemento de la lista --</mat-option>
+                                    <mat-option *ngFor="let item of loginService.currentUserValue.cod_compania" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="rptEstaMensual.get('Cod_Compania').invalid">Seleccione la compañía
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                <mat-label>Año</mat-label>
+                                <mat-select required formControlName="Anio">
+                                    <mat-option>-- Seleccione un elemento de la lista --
+                                    </mat-option>
+                                    <mat-option value="2019">2019</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="rptEstaMensual.get('Anio').invalid">Seleccione el año
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.lt-sm="100">
+                            <mat-form-field>
+                                <mat-label>Mes</mat-label>
+                                <mat-select required formControlName="Mes">
+                                    <mat-option>-- Seleccione un elemento de la lista --
+                                    </mat-option>
+                                    <mat-option value="1">Enero</mat-option>
+                                    <mat-option value="2">Febrero</mat-option>
+                                    <mat-option value="3">Marzo</mat-option>
+                                    <mat-option value="4">Abril</mat-option>
+                                    <mat-option value="5">Mayo</mat-option>
+                                    <mat-option value="6">Junio</mat-option>
+                                    <mat-option value="7">Julio</mat-option>
+                                    <mat-option value="8">Agosto</mat-option>
+                                    <mat-option value="9">Septiembre</mat-option>
+                                    <mat-option value="10">Octubre</mat-option>
+                                    <mat-option value="11">Noviembre</mat-option>
+                                    <mat-option value="12">Diciembre</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="rptEstaMensual.get('Mes').invalid">Seleccione el mes
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100%" fxFlex.lt-sm="100">
+                            <button mat-raised-button color="warn" (click)="submitrptEstaMensual()">
                     <span *ngIf="viewSpinnerImp" class="spinner-border spinner-border-sm" role="status"
                         aria-hidden="true"></span>
                         {{msgrptEstaMensual}}
                 </button>
-                <br>
-            </div>
-          </div>
-        </form>
-      <!--  <mat-selection-list #shoes>
+                            <br>
+                        </div>
+                    </div>
+                </form>
+                <!--  <mat-selection-list #shoes>
           <mat-list-option *ngFor="let shoe of typesOfShoes">
             {{shoe}}
           </mat-list-option>
@@ -97,79 +95,79 @@
         <p>
           Options selected: {{shoes.selectedOptions.selected.length}}
         </p>-->
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div fxFlex.gt-sm="50%" *ngIf="false">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-title>Multiline lists</mat-card-title>
-        <mat-card-subtitle>A selection list provides an interface for selecting values, where each list item is an
-          option.</mat-card-subtitle>
-        <mat-list>
-          <mat-list-item *ngFor="let message of messages">
-            <h3 matLine>{{message.from}}</h3>
-            <p matLine class="text-muted">{{message.subject}}</p>
-            <p matLine class="text-muted">{{message.content}}</p>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div fxFlex.gt-sm="50%" *ngIf="false">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Multiline lists</mat-card-title>
+                <mat-card-subtitle>A selection list provides an interface for selecting values, where each list item is an option.
+                </mat-card-subtitle>
+                <mat-list>
+                    <mat-list-item *ngFor="let message of messages">
+                        <h3 matLine>{{message.from}}</h3>
+                        <p matLine class="text-muted">{{message.subject}}</p>
+                        <p matLine class="text-muted">{{message.content}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
 <!-- ============================================================== -->
 <!-- List with icons selection-->
 <!-- ============================================================== -->
 <div fxLayout="row" *ngIf="false">
-  <div fxFlex.gt-sm="100%">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-title>Multiline lists</mat-card-title>
-        <mat-card-subtitle>A selection list provides an interface for selecting values, where each list item is an
-          option.</mat-card-subtitle>
-        <mat-list>
-          <mat-list-item *ngFor="let message of messages">
-            <img mat-list-avatar [src]="message.image" alt="Image of {{message.from}}">
-            <h3 matLine>{{message.from}}</h3>
-            <p matLine class="text-muted">{{message.content}}</p>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content>
+                <mat-card-title>Multiline lists</mat-card-title>
+                <mat-card-subtitle>A selection list provides an interface for selecting values, where each list item is an option.
+                </mat-card-subtitle>
+                <mat-list>
+                    <mat-list-item *ngFor="let message of messages">
+                        <img mat-list-avatar [src]="message.image" alt="Image of {{message.from}}">
+                        <h3 matLine>{{message.from}}</h3>
+                        <p matLine class="text-muted">{{message.content}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
 <!-- ============================================================== -->
 <!-- List with icons selection-->
 <!-- ============================================================== -->
 <div fxLayout="row" *ngIf="false">
-  <div fxFlex.gt-sm="100%">
-    <mat-card>
-      <mat-card-content class="p-b-0 m-b-0">
-        <mat-card-title>List with sections</mat-card-title>
-        <mat-card-subtitle>A selection list provides an interface for selecting values, where each list item is an
-          option.</mat-card-subtitle>
-      </mat-card-content>
-      <mat-list>
-        <mat-card-content class="p-t-0">
-          <h3 mat-subheader>Folders</h3>
-          <mat-list-item *ngFor="let folder of folders">
-            <mat-icon mat-list-icon>folder</mat-icon>
-            <h4 mat-line>{{folder.name}}</h4>
-            <p mat-line> {{folder.updated | date}} </p>
-          </mat-list-item>
-        </mat-card-content>
+    <div fxFlex.gt-sm="100%">
+        <mat-card>
+            <mat-card-content class="p-b-0 m-b-0">
+                <mat-card-title>List with sections</mat-card-title>
+                <mat-card-subtitle>A selection list provides an interface for selecting values, where each list item is an option.
+                </mat-card-subtitle>
+            </mat-card-content>
+            <mat-list>
+                <mat-card-content class="p-t-0">
+                    <h3 mat-subheader>Folders</h3>
+                    <mat-list-item *ngFor="let folder of folders">
+                        <mat-icon mat-list-icon>folder</mat-icon>
+                        <h4 mat-line>{{folder.name}}</h4>
+                        <p mat-line> {{folder.updated | date}} </p>
+                    </mat-list-item>
+                </mat-card-content>
 
-        <mat-divider></mat-divider>
-        <mat-card-content>
-          <h3 mat-subheader>Notes</h3>
-          <mat-list-item *ngFor="let note of notes">
-            <mat-icon mat-list-icon>note</mat-icon>
-            <h4 mat-line>{{note.name}}</h4>
-            <p mat-line> {{note.updated | date}} </p>
-          </mat-list-item>
-        </mat-card-content>
-      </mat-list>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                    <h3 mat-subheader>Notes</h3>
+                    <mat-list-item *ngFor="let note of notes">
+                        <mat-icon mat-list-icon>note</mat-icon>
+                        <h4 mat-line>{{note.name}}</h4>
+                        <p mat-line> {{note.updated | date}} </p>
+                    </mat-list-item>
+                </mat-card-content>
+            </mat-list>
 
-    </mat-card>
-  </div>
+        </mat-card>
+    </div>
 </div>

@@ -134,8 +134,6 @@ export class OperadorComponent implements OnInit {
     });
     /*devolvemr un array con los cod_compania de usuario */
     // console.log(this.loginService.currentUserValue.cod_compania)
-    var dato = new Date("2019-09-28T15:44:10.181Z");
-    console.log(dato.getHours())
     this.setDataInicial();
     this.getmunicipio("1302");
 
@@ -398,16 +396,6 @@ export class OperadorComponent implements OnInit {
   }
 
 
-  downLoadFile(data: any, type: string) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
-    let pwa = window.open(url);
-    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
-      alert('Please disable your Pop-up blocker and try again.');
-    }
-  }
-
-
   edicion(){
 
     this.rescateService.edicionForm(this.Servicio.value)
@@ -439,7 +427,10 @@ export class OperadorComponent implements OnInit {
       });
 }
 
-  
+
+
+
+
   submit() {
     // this.showToast();
     // Make sure to create a deep copy of the form-model
