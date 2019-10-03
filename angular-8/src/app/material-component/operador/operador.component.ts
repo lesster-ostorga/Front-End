@@ -397,7 +397,7 @@ export class OperadorComponent implements OnInit {
         });
   }
 
-<<<<<<< HEAD
+
   downLoadFile(data: any, type: string) {
     let blob = new Blob([data], { type: type });
     let url = window.URL.createObjectURL(blob);
@@ -440,11 +440,6 @@ export class OperadorComponent implements OnInit {
 }
 
   
-
-
-
-=======
->>>>>>> 0b7bec62d74b87ddea8ecb1ea73c5f419b49b6cb
   submit() {
     // this.showToast();
     // Make sure to create a deep copy of the form-model
