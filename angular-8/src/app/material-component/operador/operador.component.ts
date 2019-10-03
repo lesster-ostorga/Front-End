@@ -32,7 +32,9 @@ export class OperadorComponent implements OnInit {
   alertType = 'success';
   Servicio: FormGroup;
   msgLoading = 'Guardar Servicio';
+  msgLoadingImp = 'Impresión Servicio';
   viewSpinner = false;
+  viewSpinnerImp = false;
   today = new Date();
   data = {
 
@@ -63,26 +65,26 @@ export class OperadorComponent implements OnInit {
     InceVehiculo: [
       {
         Cod_Vehiculo: "",
-        Propietario_Veh: "",
+        Propietario: "",
         Conductor: "",
         Descripcion_Tipo: "",
         Marca: "",
         Modelo: "",
         Placa: "",
-        Valor_Aproximado_Vehiculo: "",
-        Perdida_Aproximado_Vehiculo: "",
+        Valor_Aproximado: "",
+        Perdidas_Aproximadas: "",
         Compañia_Aseguradora: ""
       }
     ],
 
     InceInmueble: [
       {
-        Propietario_Inm: "",
+        Propietario: "",
         Lugar_Inicio_Incendio: "",
         Cod_Causa: "",
-        Valor_Aproximado_Inm: "",
+        Valor_Aproximado: "",
         Compania_Aseguradora: "",
-        Perdida_Aproximado_Inm: ""
+        Perdidas_Aproximadas: ""
       }
     ],
 
@@ -132,6 +134,8 @@ export class OperadorComponent implements OnInit {
     });
     /*devolvemr un array con los cod_compania de usuario */
     // console.log(this.loginService.currentUserValue.cod_compania)
+    var dato = new Date("2019-09-28T15:44:10.181Z");
+    console.log(dato.getHours())
     this.setDataInicial();
     this.getmunicipio("1302");
 
@@ -158,22 +162,22 @@ export class OperadorComponent implements OnInit {
     if (Cod_Servicio == 4) {
       controlInc_Vehiculo.push(this.fb.group({
         Cod_Vehiculo: "",
-        Propietario_Veh: "",
+        Propietario: "",
         Conductor: "",
         Descripcion_Tipo: "",
         Marca: "",
         Modelo: "",
         Placa: "",
-        Valor_Aproximado_Vehiculo: "",
-        Perdida_Aproximado_Vehiculo: "",
+        Valor_Aproximado: "",
+        Perdidas_Aproximadas: "",
         Compañia_Aseguradora: "",
       }))
       controlInc_Inmueble.push(this.fb.group({
-        Propietario_Inm: "",
+        Propietario: "",
         Lugar_Inicio_Incendio: "",
         Cod_Causa: "",
-        Valor_Aproximado_Inm: "",
-        Perdida_Aproximado_Inm: "",
+        Valor_Aproximado: "",
+        Perdidas_Aproximadas: "",
         Compania_Aseguradora: "",
       }))
 
@@ -195,11 +199,11 @@ export class OperadorComponent implements OnInit {
   addNewInmueble(control) {
     control.push(
       this.fb.group({
-        Propietario_Inm: ['', [Validators.required]],
+        Propietario: ['', [Validators.required]],
         Lugar_Inicio_Incendio: ['', [Validators.required]],
         Cod_Causa: ['', [Validators.required]],
-        Valor_Aproximado_Inm: ['', [Validators.required]],
-        Perdida_Aproximado_Inm: ['', [Validators.required]],
+        Valor_Aproximado: ['', [Validators.required]],
+        Perdidas_Aproximadas: ['', [Validators.required]],
         Compania_Aseguradora: ['', [Validators.required]]
       }))
   }
@@ -208,14 +212,14 @@ export class OperadorComponent implements OnInit {
     control.push(
       this.fb.group({
         Cod_Vehiculo: ['', [Validators.required]],
-        Propietario_Veh: ['', [Validators.required]],
+        Propietario: ['', [Validators.required]],
         Conductor: ['', [Validators.required]],
         Descripcion_Tipo: ['', [Validators.required]],
         Marca: ['', [Validators.required]],
         Modelo: ['', [Validators.required]],
         Placa: ['', [Validators.required]],
-        Valor_Aproximado_Vehiculo: ['', [Validators.required]],
-        Perdida_Aproximado_Vehiculo: ['', [Validators.required]],
+        Valor_Aproximado: ['', [Validators.required]],
+        Perdidas_Aproximadas: ['', [Validators.required]],
         Compañia_Aseguradora: ['', [Validators.required]]
       }))
   }
@@ -366,21 +370,26 @@ export class OperadorComponent implements OnInit {
     window.location.reload();
   }
 
+
   submitImpresion() {
-    //this.router.navigate(['/operadord']);
-    this.rescateService.ImpresionServicio()
+    this.viewSpinnerImp = true;
+    this.msgLoadingImp = "Descargando..."
+    this.rescateService.ImpresionServicio(this.Servicio.value)
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
-          this.downLoadFile(data, "application/pdf")
-          this.ToastrService.success(this.msgRes, "Descarga de archivo", {
-            progressBar: true
-          });
-          this.viewForm = false
+          this.viewSpinnerImp = false;
+          this.msgLoadingImp = "Impresión Servicio"
+          const linkSource = 'data:application/pdf;base64,' + data.msgRespuesta;
+          const downloadLink = document.createElement("a");
+          const fileName = this.Servicio.controls.Cod_Compania.value + "_" + this.Servicio.controls.NoControl.value + ".pdf";
+          downloadLink.href = linkSource;
+          downloadLink.download = fileName;
+          downloadLink.click();
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
+          this.viewSpinnerImp = false;
+          this.msgLoadingImp = "Impresión Servicio"
           this.ToastrService.error(error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.msgRespuesta, "Error en operación", {
             progressBar: true
           });
@@ -388,6 +397,7 @@ export class OperadorComponent implements OnInit {
         });
   }
 
+<<<<<<< HEAD
   downLoadFile(data: any, type: string) {
     let blob = new Blob([data], { type: type });
     let url = window.URL.createObjectURL(blob);
@@ -397,6 +407,44 @@ export class OperadorComponent implements OnInit {
     }
   }
 
+
+  edicion(){
+
+    this.rescateService.edicionForm(this.Servicio.value)
+    .pipe(first())
+    .subscribe(
+      data => {
+        //this.router.navigate(['/starter']);
+        this.viewMsg = true;
+        this.alertType = "success";
+        this.viewSpinner = false;
+        this.msgLoading = "Guardar Servicio";
+        this.msgRes = data.msgRespuesta;
+        this.Servicio.reset();
+        this.ToastrService.success(this.msgRes, "Servicio Guardado", {
+          progressBar: true
+        });
+        this.viewForm = false
+      },
+      (error: HttpErrorResponse) => {
+        this.viewMsg = true;
+        this.alertType = "danger";
+        this.viewSpinner = false;
+        this.msgLoading = "Guardar Servicio";
+        console.log(error);
+        this.ToastrService.error(error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.msgRespuesta, "Error en operación", {
+          progressBar: true
+        });
+        this.msgRes = error.error.msgRespuesta == "undefined" ? "Ocurrió un error por favor vuelta a iniciar sesión para intentarlo de nuevo." : error.error.codError + ": " + error.error.msgRespuesta;
+      });
+}
+
+  
+
+
+
+=======
+>>>>>>> 0b7bec62d74b87ddea8ecb1ea73c5f419b49b6cb
   submit() {
     // this.showToast();
     // Make sure to create a deep copy of the form-model
@@ -420,8 +468,11 @@ export class OperadorComponent implements OnInit {
           this.alertType = "success";
           this.viewSpinner = false;
           this.msgLoading = "Guardar Servicio";
-          this.msgRes = data.msgRespuesta;
-          this.Servicio.reset();
+          //Se coloca no control real con el numero devuleto por la API
+          let NoControl = <FormControl>this.Servicio.controls.NoControl;
+          NoControl.setValue(data.msgRespuesta);
+          this.msgRes = ' El servicio fue guardado correctamente con el número: ' + data.msgRespuesta;
+          //this.Servicio.reset();
           this.ToastrService.success(this.msgRes, "Servicio Guardado", {
             progressBar: true
           });

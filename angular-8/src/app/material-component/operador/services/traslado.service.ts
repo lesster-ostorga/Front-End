@@ -13,8 +13,9 @@ import { LoginService } from '../../../core/services/login.service'
 
 export class Serviciotraslado {
 
-  readonly url = 'https://umgdemo.azurewebsites.net/api/catalogos/';
+  readonly url = 'https://umgdemo.azurewebsites.net/api/';
   listCatalogoRescate: catalogosRescate;
+  listServicio: catalogosRescate;
   // listVoBo : Municipio[];
   // listUnidades : Traslado[];
   // listPilotos : Traslado[];
@@ -32,10 +33,13 @@ export class Serviciotraslado {
     })
   }
 
+  
+
   TrasladoList() {
 
-    this.http.get(this.url+'general', this.httpOptions).toPromise().then(result => this.listCatalogoRescate = result as catalogosRescate);
-
+    this.http.get(this.url+'catalogos/general', this.httpOptions).toPromise().then(result => this.listCatalogoRescate = result as catalogosRescate);
+    //this.http.post('http://localhost:49220/api/servicio', this.httpOptions).toPromise().then(result => this.listServicio = result as catalogosRescate);
+    console.log("hola");
     // this.http.get(this.url + 'VoBo?id=44').toPromise().then(result=>this.listVoBo = result as Traslado[]);
     // his.http.get(this.url + 'Unidades?id=44').toPromise().then(result=>this.listUnidades = result as Traslado[]);
     // this.http.get(this.url + 'Pilotos?id=44').toPromise().then(result=>this.listPilotos = result as Traslado[]);
